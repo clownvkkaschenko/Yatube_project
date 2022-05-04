@@ -1,0 +1,17 @@
+body {
+    transition: 1s;
+}
+button {
+	padding: 1px;  
+    background-color: lightskyblue;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-size: 1em;
+    margin-top: 1%;
+    outline: none;
+}
+button:hover {
+    transition: 0.7s;
+    background: #000
+}

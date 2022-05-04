@@ -1,0 +1,18 @@
+body {
+    background: rgb(11, 11, 11);
+    transition: 1s;
+}
+button {
+    padding: 1 4px;
+    background-color: lightskyblue;
+    color: #000;
+    border: none;
+    border-radius: 3px;
+    font-size: 1em;
+    margin-top: 1%;
+    outline: none;
+}
+button:hover {
+    transition: 0.7s;
+    background: #fff;
+}
