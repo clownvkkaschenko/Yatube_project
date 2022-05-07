@@ -6,6 +6,7 @@ LMT_PSTS = 10  # limit posts per page
 
 
 def index(request):
+    template = 'posts/index.html'
     posts = Post.objects.all()[:LMT_PSTS]
     title = 'Главная страница YaTube'
     text = 'Последние обновления на сайте'
@@ -14,10 +15,11 @@ def index(request):
         'text': text,
         'posts': posts
     }
-    return render(request, 'posts/index.html', context)
+    return render(request, template, context)
 
 
 def group_posts(request, slug):
+    template = 'posts/group_list.html'
     group = get_object_or_404(Group, slug=slug)
     posts = group.group_list.all()[:LMT_PSTS]
     title = f'Записи сообщества {group.title}'
@@ -26,4 +28,4 @@ def group_posts(request, slug):
         'posts': posts,
         'title': title
     }
-    return render(request, 'posts/group_list.html', context)
+    return render(request, template, context)
