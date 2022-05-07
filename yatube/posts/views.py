@@ -2,26 +2,28 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import Post, Group
 
+LMT_PSTS = 10  # limit posts per page
+
 
 def index(request):
-    posts = Post.objects.order_by('-pub_date')[:10]
+    posts = Post.objects.all()[:LMT_PSTS]
+    title = 'Главная страница YaTube'
+    text = 'Последние обновления на сайте'
     context = {
-        'posts': posts,
-        'title': 'Главная страница',
-        'text': 'Последние обновления на сайте'
+        'title': title,
+        'text': text,
+        'posts': posts
     }
     return render(request, 'posts/index.html', context)
 
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
-    # Метод .filter позволяет ограничить поиск по критериям.
-    # Это аналог добавления
-    # условия WHERE group_id = {group_id}
-    posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
+    posts = group.group_list.all()[:LMT_PSTS]
+    title = f'Записи сообщества {group.title}'
     context = {
         'group': group,
         'posts': posts,
-        'title': f'Записи сообщества {group.title}'
+        'title': title
     }
     return render(request, 'posts/group_list.html', context)

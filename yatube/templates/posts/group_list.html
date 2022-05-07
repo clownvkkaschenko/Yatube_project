@@ -3,31 +3,32 @@
   {{ group.title }}
 {% endblock %}
 {% block content %}
-  <!-- класс py-5 создает отступы сверху и снизу блока -->
   <div class="container py-5">
     <h1>{{ title }}</h1>
     <p>
       {{ group.description }}
     </p>
     {% for group in posts %}
-    <br>
-    <article>  
     <div class="card">
-      <div class="card-body">
-      <ul>
-        <li>
-          Автор: {{ group.author.get_full_name }}
-        </li>
-        <li>
-          Дата публикации: {{ group.pub_date|date:"d E Y" }}
-        </li>
-      </ul>
-      <p align="justify">{{ group.text }}</p>
-      {% if not forloop.last %}{% endif %}
+      <div class="card_body">
+        <article>
+          <table width="100%">
+            <tr>
+              <td align="left">
+                Автор: {{ group.author.get_full_name }}
+              </td>
+              <td align="right">
+                Дата публикации: {{ group.pub_date|date:"d E Y" }}
+              </td>
+            </tr>
+          </table>
+          <p align="justify">
+            {{ group.text }}
+          </p>
+        </article>
+       </div>
       </div>
-    </div>  
-    </article>
-    {% endfor %}           
-    <!-- под последним постом нет линии -->
+      {% if not forloop.last %}<br>{% endif %}
+    {% endfor %}
   </div>
 {% endblock %}

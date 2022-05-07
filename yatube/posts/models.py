@@ -1,5 +1,6 @@
-from django.contrib.auth import get_user_model
 from django.db import models
+from django.contrib.auth import get_user_model
+
 
 User = get_user_model()
 
@@ -25,3 +26,6 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         blank=True, null=True,
         related_name='group_list')
+
+    class Meta:
+        ordering = ['-pub_date']
