@@ -1,0 +1,9 @@
+<div class="left">
+  Автор: {{ post.author.get_full_name }} ({{ post.author.username }})
+</div>
+<div class="right">
+  Дата публикации: {{ post.pub_date|date:"d E Y" }}
+</div>
+<p class="justify">
+  {{ post.text }}
+</p>

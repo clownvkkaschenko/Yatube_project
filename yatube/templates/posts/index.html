@@ -3,40 +3,24 @@
    {{ title }}
 {% endblock %}
 {% block content %}
-  <div class="container py-4">   
-    <h1> {{ text }} </h1>
+  <div class="container py-3">   
+    <h1 class="contents"> {{ text }} </h1>
     {% for post in posts %}
-    <div class="card">
-      <div class="card_body">
-        <article>
-          <table width="100%">
-            <tr>
-              <td align="left">
-                Автор: {{ post.author.get_full_name }}
-              </td>
-              <td align="right">
-                Дата публикации: {{ post.pub_date|date:"d E Y" }}
-              </td>
-            </tr>
-          </table>
-          <p class="justify">
-            {{ post.text }}
-          </p>
-        </article>
-        <table widtg="100%">
-          <tr>
-            <td align="left">
-              {% if post.group %}   
-                <a href="{% url 'posts:group_list' post.group.slug %}" class="test_style">
-                  Все записи группы
-                </a>
-              {% endif %} 
-            </td>
-          </tr>
-        </table>
+      <div class="card">
+        <div class="card_body">
+          <article>
+            {% include 'includes/article.html' %}
+          </article>
+          <td align="left">
+            {% if post.group %}   
+              <a href="{% url 'posts:group_list' post.group.slug %}" class="test_style">
+                {{ post.group }}
+              </a>
+            {% endif %} 
+          </td>
+        </div>
       </div>
-    </div>
-    {% if not forloop.last %}<br>{% endif %}
+      {% if not forloop.last %}<hr>{% endif %}
     {% endfor %}
   </div>
 {% endblock %}

@@ -3,32 +3,20 @@
   {{ group.title }}
 {% endblock %}
 {% block content %}
-  <div class="container py-4">
-    <h1>{{ title }}</h1>
-    <p>
+  <div class="container py-3">
+    <h1 class="contents"> {{ title }} </h1>
+    <h5 class="contents">
       {{ group.description }}
-    </p>
-    {% for group in posts %}
-    <div class="card">
-      <div class="card_body">
-        <article>
-          <table width="100%">
-            <tr>
-              <td align="left">
-                Автор: {{ group.author.get_full_name }}
-              </td>
-              <td align="right">
-                Дата публикации: {{ group.pub_date|date:"d E Y" }}
-              </td>
-            </tr>
-          </table>
-          <p class="justify">
-            {{ group.text }}
-          </p>
-        </article>
+    </h5>
+    {% for post in posts %}
+      <div class="card">
+        <div class="card_body">
+          <article>
+            {% include 'includes/article.html' %}
+          </article>
+        </div>
       </div>
-    </div>
-    {% if not forloop.last %}<br>{% endif %}
+      {% if not forloop.last %}<hr>{% endif %}
     {% endfor %}
   </div>
 {% endblock %}
