@@ -3,7 +3,7 @@
    {{ title }}
 {% endblock %}
 {% block content %}
-  <div class="container py-3">   
+  <div class="container py-3">  
     <h1 class="contents"> {{ text }} </h1>
     {% for post in posts %}
       <div class="card">
@@ -11,7 +11,7 @@
           <article>
             {% include 'includes/article.html' %}
           </article>
-          <td align="left">
+          <td class="left">
             {% if post.group %}   
               <a href="{% url 'posts:group_list' post.group.slug %}" class="test_style">
                 {{ post.group }}
