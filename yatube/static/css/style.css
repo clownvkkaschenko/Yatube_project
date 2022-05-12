@@ -1,3 +1,6 @@
+.navbar {
+    background-color: lightskyblue;
+}
 div.card {
     color: #000;
     transition: 0.5s;
@@ -51,4 +54,34 @@ html, body {
 }
 .test_style:hover {
     color: #00aeff;
+}
+
+body.dark div.card {
+    transition: 0.5s;
+    color: #fff;
+    padding: 17px 16px 15px 16px;
+    border: 1px solid lightskyblue;
+    border-radius: 0.55em;
+    background-color: rgb(36, 36, 36);
+}
+body.dark .wrapper {
+    color: #fff;
+    transition: 0.5s;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(36, 36, 36);
+}
+body.dark .test_style {
+    color: #00aeff;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+}
+body.dark .test_style:hover {
+    color: rgb(25, 0, 255);
+}
+body.dark .navbar {
+    transition: 0.5s;
+    background-color: rgb(65, 65, 72);
 }
