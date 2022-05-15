@@ -55,7 +55,32 @@ html, body {
 .test_style:hover {
     color: #00aeff;
 }
+.parallax {
+    background-image: url('https://w.wallhaven.cc/full/q6/wallhaven-q6x8vr.png');
+    height: 300px;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 60px;
+    align-items: center;
+    position: relative;
+    border-radius: 0.35em;
+}
+.parallax .mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+.parallax h1 {
+    @import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
+    font-family: 'Sigmar One', cursive;
+    font-size: 60px;
+    text-align: center;
+}
 
+/* DARK MODE */
 body.dark div.card {
     transition: 0.5s;
     color: #fff;
