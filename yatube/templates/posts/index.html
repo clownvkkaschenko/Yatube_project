@@ -3,13 +3,14 @@
    {{ title }}
 {% endblock %}
 {% block content %}
+  <div class="parallax">
+    <h1 class="sigmar">
+      Social network YaTube
+    </h1>
+    <div class="mask"></div>
+  </div>
   <div class="container py-3">
-    <div class="parallax">
-      <h1 class="sigmar">
-        Последние обновления на сайте
-      </h1>
-      <div class="mask"></div>
-    </div><br>
+    <h1 class="contents"> {{ text }} </h1>
     {% for post in posts %}
       <div class="card">
         <div class="card_body">
