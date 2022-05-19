@@ -2,6 +2,9 @@
 {% block title %}
   {{ group.title }}
 {% endblock %}
+{% block header %}
+  {% include 'includes/header_group.html' %}
+{% endblock %}
 {% block content %}
   <div class="container py-3">
     <h1 class="contents">{{ title }}</h1>

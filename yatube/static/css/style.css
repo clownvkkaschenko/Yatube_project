@@ -1,5 +1,10 @@
 .navbar {
     transition: 0.5s;
+    background-image: url('https://images.pexels.com/photos/3789871/pexels-photo-3789871.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background-attachment: fixed; 
+}
+.navbar_group {
+    transition: 0.5s;
     background-color: lightskyblue;
 }
 div.card {
@@ -123,7 +128,8 @@ body.dark .test_style:hover {
 }
 body.dark .navbar {
     transition: 0.5s;
-    background-color: rgb(65, 65, 72);
+    background-image: url('https://images.pexels.com/photos/416920/pexels-photo-416920.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background-attachment: fixed; 
 }
 body.dark .parallax {
     transition: 0.5s;
@@ -152,4 +158,8 @@ body.dark .sigmar {
 body.dark .tube {
     transition: 0.5s;
     color: #fff;
+}
+body.dark .navbar_group {
+    transition: 0.5s;
+    background-color: rgb(65, 65, 72);
 }
