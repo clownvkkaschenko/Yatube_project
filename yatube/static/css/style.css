@@ -57,8 +57,9 @@ html, body {
     color: #00aeff;
 }
 .parallax {
-    background-image: url('https://w.wallhaven.cc/full/dp/wallhaven-dpo38l.jpg');
-    height: 300px;
+    transition: 0.5s;
+    background-image: url('https://images.pexels.com/photos/3789871/pexels-photo-3789871.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    height: 250px;
     background-attachment: fixed;
     display: flex;
     justify-content: center;
@@ -79,7 +80,7 @@ html, body {
     font-size: 80px;
     text-align: center;
     font-weight: bolder;
-    background: url('https://images.pexels.com/photos/1660193/pexels-photo-1660193.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background: url('https://images.pexels.com/photos/2832084/pexels-photo-2832084.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
     color: transparent;
     -webkit-background-clip: text;
             background-clip: text;
@@ -123,6 +124,30 @@ body.dark .test_style:hover {
 body.dark .navbar {
     transition: 0.5s;
     background-color: rgb(65, 65, 72);
+}
+body.dark .parallax {
+    transition: 0.5s;
+    background-image: url('https://images.pexels.com/photos/416920/pexels-photo-416920.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    height: 250px;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 60px;
+    align-items: center;
+    position: relative;
+}
+body.dark .sigmar {
+    @import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
+    font-family: 'Sigmar One', cursive;
+    font-size: 80px;
+    text-align: center;
+    font-weight: bolder;
+    background: url('https://w.wallhaven.cc/full/1k/wallhaven-1kwkmg.png');
+    color: transparent;
+    -webkit-background-clip: text;
+            background-clip: text;
+    animation: animate 10s infinite ease-in-out;
 }
 body.dark .tube {
     transition: 0.5s;
