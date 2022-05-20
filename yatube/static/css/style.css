@@ -3,6 +3,18 @@
     background-image: url('https://images.pexels.com/photos/3789871/pexels-photo-3789871.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
     background-attachment: fixed; 
 }
+.head_swt {
+    background: 0 0;
+    border: 0;
+    border-radius: 0.25rem;
+    color: #212529;
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}
+.head_swt:hover {
+    color: rgb(98, 0, 255);
+}
 .navbar_group {
     transition: 0.5s;
     background-color: lightskyblue;
@@ -11,6 +23,12 @@ div.card {
     color: #000;
     transition: 0.5s;
     padding: 17px 16px 15px 16px;
+    border: 1px solid lightskyblue;
+    border-radius: 0.55em;
+}
+div.card_logget {
+    color: #000;
+    transition: 0.5s;
     border: 1px solid lightskyblue;
     border-radius: 0.55em;
 }
@@ -45,6 +63,7 @@ html, body {
 }
 .main {
     flex: 1 1 auto;
+    overflow: hidden;  /* removed bottom scroll in /auth/logout/ */
 }
 #theme-toggle {
     background-color: lightskyblue;
@@ -162,4 +181,45 @@ body.dark .tube {
 body.dark .navbar_group {
     transition: 0.5s;
     background-color: rgb(65, 65, 72);
+}
+body.dark .card_logget {
+    color: #fff;
+    transition: 0.5s;
+    border: 1px solid lightskyblue;
+    border-radius: 0.55em;
+}
+body.dark .card-header{
+    padding: .5rem 1rem;
+    margin-bottom: 0;
+    background-color: rgba(202, 202, 202, 0.147);
+    border-bottom: 1px solid lightskyblue;
+}
+body.dark .form-control {
+    transition: 0.5s;
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #8d8f927d;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+body.dark .head_swt {
+    background: 0 0;
+    border: 0;
+    color: #fff;
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}
+body.dark .head_swt:hover {
+    color: rgb(0, 217, 255);
 }
