@@ -3,19 +3,42 @@
     background-image: url('https://images.pexels.com/photos/3789871/pexels-photo-3789871.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
     background-attachment: fixed; 
 }
+#tt-img{
+    width: 28px;
+}
 .head_swt {
-    background: 0 0;
-    border: 0;
-    border-radius: 0.25rem;
-    color: #212529;
+    color: rgb(98, 98, 98);
     display: block;
     padding: 0.5rem 1rem;
     text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 17px;
 }
-.head_swt:hover {
-    color: rgb(98, 0, 255);
+.head_swt:after {
+    position: relative;
+    display: block;
+    content: "";
+    background-color: #000000;
+    height: 3px;
+    width: 0%;
+    left: 50%;
+    -webkit-transition: width .3s ease-in-out;
+    -moz--transition: width .3s ease-in-out;
+    transition: width .3s ease-in-out;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.head_swt:hover:after,
+.head_swt:focus:after {
+    width: 100%;
+}
+.head_swt:hover{
+    color: #000;
 }
 .navbar_group {
+    display: flex;
     transition: 0.5s;
     background-color: lightskyblue;
 }
@@ -112,7 +135,7 @@ html, body {
 }
 @keyframes animate {
     from {
-        background-position: 0 0;
+        background-position: 0% 0%;
     }
     to {
         background-position: 100% 100%;
@@ -147,12 +170,12 @@ body.dark .test_style:hover {
 }
 body.dark .navbar {
     transition: 0.5s;
-    background-image: url('https://images.pexels.com/photos/416920/pexels-photo-416920.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background-image: url('https://w.wallhaven.cc/full/e7/wallhaven-e7ek7k.jpg');
     background-attachment: fixed; 
 }
 body.dark .parallax {
     transition: 0.5s;
-    background-image: url('https://images.pexels.com/photos/416920/pexels-photo-416920.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background-image: url('https://w.wallhaven.cc/full/e7/wallhaven-e7ek7k.jpg');
     height: 250px;
     background-attachment: fixed;
     display: flex;
@@ -168,7 +191,7 @@ body.dark .sigmar {
     font-size: 80px;
     text-align: center;
     font-weight: bolder;
-    background: url('https://w.wallhaven.cc/full/1k/wallhaven-1kwkmg.png');
+    background: url('https://w.wallhaven.cc/full/96/wallhaven-968ol8.jpg');
     color: transparent;
     -webkit-background-clip: text;
             background-clip: text;
@@ -215,11 +238,14 @@ body.dark .form-control {
 body.dark .head_swt {
     background: 0 0;
     border: 0;
-    color: #fff;
+    color: #a0a8b0;
     display: block;
     padding: 0.5rem 1rem;
     text-decoration: none;
 }
 body.dark .head_swt:hover {
-    color: rgb(0, 217, 255);
+    color: #fff;
+}
+body.dark .head_swt:after {
+    background-color: #fff;
 }

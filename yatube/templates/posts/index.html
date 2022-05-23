@@ -3,7 +3,7 @@
    {{ title }}
 {% endblock %}
 {% block header %}
-  {% include 'includes/header.html' %}
+  {% include 'includes/header_index.html' %}
 {% endblock %}
 {% block content %}
   <div class="parallax">
@@ -14,7 +14,7 @@
   </div>
   <div class="container py-3">
     <h1 class="contents"> {{ text }} </h1>
-    {% for post in posts %}
+    {% for post in page_obj %}
       <div class="card">
         <div class="card_body">
           <article>
@@ -31,5 +31,6 @@
       </div>
       {% if not forloop.last %}<hr>{% endif %}
     {% endfor %}
+    {% include 'includes/paginator.html' %}
   </div>
 {% endblock %}

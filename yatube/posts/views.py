@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 
 from .models import Post, Group
@@ -7,13 +8,16 @@ LMT_PSTS: int = 10  # limit posts per page
 
 def index(request):
     template = 'posts/index.html'
-    posts = Post.objects.select_related('group').all()[:LMT_PSTS]
+    posts = Post.objects.select_related('group').all()
+    paginator = Paginator(posts, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     title = 'Главная страница YaTube'
     text = 'Последние обновления на сайте'
     context = {
+        'page_obj': page_obj,
         'title': title,
         'text': text,
-        'posts': posts
     }
     return render(request, template, context)
 

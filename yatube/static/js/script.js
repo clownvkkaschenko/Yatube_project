@@ -1,9 +1,19 @@
-if (!localStorage.theme) localStorage.theme = "light"
-document.body.className = localStorage.theme
+const swt = document.getElementById('theme-toggle')
+const img = document.getElementById('tt-img')
 
-const swt = document.querySelector("#theme-toggle", ".swt > span");
+swt.addEventListener('click', function() {
+  if (document.body.classList.contains('dark')) {
+    document.body.classList.remove('dark')
+    img.src='/static/img/mode/moon.png'
+    localStorage.theme = 'light'
+  } else {
+    document.body.classList.add('dark')
+    img.src='/static/img/mode/sun.png'
+    localStorage.theme = 'dark'
+  }
+})
 
-swt.addEventListener("click", function() {
-  document.body.classList.toggle("dark")
-  localStorage.theme = document.body.className || "light"
-});
+if (localStorage.theme =='dark') {
+  document.body.classList.add('dark')
+  img.src='/static/img/mode/sun.png'
+}

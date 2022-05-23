@@ -10,19 +10,22 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/fav/favicon-16x16.png' %}">
     <meta name="msapplication-TileColor" content="#000">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="test_theme">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="style_theme">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" id="main_theme">
+    <link rel="stylesheet" href="{% static 'css/paginator.css' %}" id="paginator_theme">
+    <script src="{% static 'js/script.js' %}" defer></script>
     <title>{% block title %}title{% endblock %}</title>
   </head>
   <body>
     <div class="wrapper">
       <header>
-        {% block header %}{% endblock %}
-        <script src="/static/js/script.js"></script>
+        {% block header %}
+          {% include 'includes/header.html' %}
+        {% endblock %}
       </header>
       <main class="main">
         {% block content %}
-          info
+          mainInfo
         {% endblock %}
       </main>
       <footer class="border-top text-center py-3">
