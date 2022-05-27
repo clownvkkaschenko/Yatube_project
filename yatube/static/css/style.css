@@ -3,9 +3,6 @@
     background-image: url('https://images.pexels.com/photos/3789871/pexels-photo-3789871.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
     background-attachment: fixed; 
 }
-#tt-img{
-    width: 28px;
-}
 .head_swt {
     color: rgb(98, 98, 98);
     display: block;
@@ -88,12 +85,6 @@ html, body {
     flex: 1 1 auto;
     overflow: hidden;  /* removed bottom scroll in /auth/logout/ */
 }
-#theme-toggle {
-    background-color: lightskyblue;
-    background: none;
-    border: none;
-    padding: 0;
-}
 .test_style {
     color: rgb(25, 0, 255);
     position: relative;
@@ -140,6 +131,9 @@ html, body {
     to {
         background-position: 100% 100%;
     }
+}
+.techdark{
+    transition: 0.5s;
 }
 
 /* DARK MODE */
@@ -248,4 +242,10 @@ body.dark .head_swt:hover {
 }
 body.dark .head_swt:after {
     background-color: #fff;
+}
+body.dark .techdark{
+    transition: 0.5s;
+    color: #fff;
+    background-color: rgb(36, 36, 36);
+    border-bottom: 1px solid lightskyblue;
 }

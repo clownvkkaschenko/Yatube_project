@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'posts.apps.PostsConfig',  # created an app "posts"
     'users.apps.UsersConfig',  # created an app "users"
     'core.apps.CoreConfig',  # created an app "core"
+    'about.apps.AboutConfig',  # created an app "about"
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -114,6 +115,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'posts:index'
-LOGOUT_REDIRECT_URL = 'posts:index'
+#  LOGOUT_REDIRECT_URL = 'posts:index'
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')

@@ -1,4 +1,6 @@
-from django.contrib.auth.views import LogoutView, LoginView
+from django.contrib.auth.views import (LogoutView, LoginView,
+                                      PasswordChangeView, PasswordChangeDoneView,
+                                      PasswordResetView)
 from django.urls import path
 from . import views
 
@@ -22,19 +24,19 @@ urlpatterns = [
     #  сброс пароля через почту
     path(
       'password_reset_form/',
-      LoginView.as_view(template_name='users/password_reset_form.html'),
+      PasswordResetView.as_view(template_name='users/password_reset_form.html'),
       name = 'password_reset_form'
     ),
     #  смена пароля
     path(
       'password_change/',
-      LoginView.as_view(template_name='users/password_change.html'),
+      PasswordChangeView.as_view(template_name='users/password_change_form.html'),
       name = 'password_change'
     ),
     #  окно при успешной смене пароля
     path(
       'password_change/done/',
-      LoginView.as_view(template_name='users/change_done.html'),
-      name = 'password_change/done'
+      PasswordChangeDoneView.as_view(template_name='users/password_change_done.html'),
+      name = 'password_change_done'
     ),
 ]

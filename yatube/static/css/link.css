@@ -1,0 +1,15 @@
+.link_about {
+    color: #000;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+}
+.link_about:hover {
+    color: #00aeff;
+}
+body.dark .link_about {
+    color: #fff;
+}
+body.dark .link_about:hover {
+    color: #00aeff;
+}

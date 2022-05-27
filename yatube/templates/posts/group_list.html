@@ -6,7 +6,7 @@
   <div class="container py-3">
     <h1 class="contents">{{ title }}</h1>
     <h5 class="contents">{{ group.description }}</h5>
-    {% for post in posts %}
+    {% for post in page_obj %}
       <div class="card">
         <div class="card_body">
           <article>
@@ -16,5 +16,6 @@
       </div>
       {% if not forloop.last %}<hr>{% endif %}
     {% endfor %}
+    {% include 'includes/paginator.html' %}
   </div>
 {% endblock %}
