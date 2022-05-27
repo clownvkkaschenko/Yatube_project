@@ -8,10 +8,10 @@
     <div class="nav nav-pills">
       {% if user.is_authenticated %}
         <div class="nav-item">
-          <a class="head_swt" href="{% url 'posts:profile' user.username %}">Пользователь: {{ user.username }}</a>
+          <a class="head_swt" href="{% url 'posts:profile' user.username %}">{{ user.username }}</a>
         </div>
         <div class="nav-item">
-          <a class="head_swt" href="">Создать пост</a>
+          <a class="head_swt" href="{% url 'posts:post_create' %}">Создать запись</a>
         </div>
         <div class="nav-item">
           <a class="head_swt" href="{% url 'password_change' %}">Сменить пароль</a>

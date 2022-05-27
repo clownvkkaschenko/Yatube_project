@@ -34,6 +34,9 @@
 .head_swt:hover{
     color: #000;
 }
+.head_swt.active {
+    color: #000;
+}
 .navbar_group {
     display: flex;
     transition: 0.5s;
@@ -248,4 +251,8 @@ body.dark .techdark{
     color: #fff;
     background-color: rgb(36, 36, 36);
     border-bottom: 1px solid lightskyblue;
+}
+body.dark .head_swt.active {
+    transition: 0.5s;
+    color: #fff;
 }

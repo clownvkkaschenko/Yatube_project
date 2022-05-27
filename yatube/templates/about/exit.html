@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-{% block title %}Вы вышли из системы{% endblock %}
+{% block title %}Вы собираетесь выйти из системы{% endblock %}
 {% block content %}
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8 p-5">
+    <div class="col-md-6 p-5">
       <div class="card_logget">
         <div class="card-header">
           Выход из системы
@@ -18,7 +18,7 @@
             </a>
           </div>
           <div class="button_ext" style="display: flex; justify-content: right;">
-            <a type="submit" class="btn btn-primary" href="/">
+            <a onclick="javascript:history.back(); return false;" class="btn btn-primary" >
               Нет
             </a>
           </div>

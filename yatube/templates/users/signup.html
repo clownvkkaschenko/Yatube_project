@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Зарегистрироваться{% endblock %}
 {% block content %}
+{% load user_filters %}
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8 p-5">
       <div class="card_logget">
         <div class="card-header">Зарегистрироваться</div>
           <div class="card-body">
-          {% load user_filters %}
             {% if form.errors %}
               {% for field in form %} 
                 {% for error in field.errors %}            
@@ -35,9 +35,7 @@
               <div>
               {{ field|addclass:'form-control' }} 
                 {% if field.help_text %}
-                <small 
-                  id="{{ field.id_for_label }}-help"
-                  class="form-text text-muted">
+                  <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
                     {{ field.help_text|safe }}
                   </small>
                 {% endif %}
