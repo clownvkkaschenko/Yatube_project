@@ -8,11 +8,20 @@
 - Установите и активируйте виртуальное окружение
 - Установите зависимости из файла requirements.txt
 ```
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ``` 
 - В папке с файлом _manage.py_ выполните команду:
 ```
-python3 manage.py runserver
+$ python manage.py runserver
+```
+### Работа с миграциями
+- Из директории yatube_projects/yatube (в ней должен находиться файл manage.py) запустите команду создания скрипта миграций 
+```
+python manage.py makemigrations
+```
+- Теперь нужно запустить все миграции. Выполните команду migrate
+```
+$ python manage.py migrate
 ```
 ### Автор
 Ivan Konyshkin
