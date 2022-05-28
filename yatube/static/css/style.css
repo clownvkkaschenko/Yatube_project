@@ -65,7 +65,7 @@ div.card_logget {
     margin-bottom: -0.3%;
     margin-top: -0.3%;
 }
-.contents {
+h1, h2, h3, h4, h5, p {
     font-family: Arial;
 }
 .left {

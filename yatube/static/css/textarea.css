@@ -1,13 +1,16 @@
-.txta {
-    overflow: hidden;
-    line-height: 1.1;
-    border: 1px solid;
+#id_group {
+    max-height: 2em !important;
+    min-height: 2em !important;
+}
+#id_text  {
+    width: 100%;
+    line-height:normal;
     resize: none;
-    margin:0;
+    border: 1px solid;
+    padding: 8px;
     outline: none;
 	-moz-appearance: none;
     float:left;
-    margin-bottom:.5rem;
     font-family: Verdana;
     font-size: 17;
 }
@@ -15,8 +18,4 @@ body.dark .txta{
     transition: 0.5s;
     background-color: rgb(67, 67, 67);
     color: rgb(228, 224, 224);
-}
-body.dark .form-control{
-    transition: 0.5s;
-    background-color: rgb(67, 67, 67);
 }

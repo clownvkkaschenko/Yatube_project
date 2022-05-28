@@ -4,8 +4,9 @@ from .models import Post, Group
 
 
 class PostAdmin(admin.ModelAdmin):
+    """Post management via admin."""
     list_display = (
-        'pk',
+        'pk',  # id
         'text',
         'pub_date',
         'author',
@@ -17,6 +18,7 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class GroupAdmin(admin.ModelAdmin):
+    """Group management via admin."""
     list_display = (
         'title',
         'slug',

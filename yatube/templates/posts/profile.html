@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
+{% load tz %}
 {% block title %}
-  {{ author.get_full_name }}@{{  author.username  }} {{  title  }}
+  {{ author.get_full_name }}@{{  author.username  }}{{  title  }}
 {% endblock %}
 {% block content %}
   <div class="container py-3">
-    <h1>Все посты пользователя {{ author.get_full_name }}@{{  author.username  }} </h1>
-    <h3>Всего постов: {{ posts.count }} </h3>
+    <h1>Профиль пользователя: {{ author.get_full_name }}@{{  author.username  }} </h1>
+    <h3>Зарегестрировался на сайте: {{ author.date_joined|timezone:"Europe/Moscow" }} по мск.</h3>
+    <h5>Всего постов на этом сайте: {{ posts.count }} </h5>
     {% for post in page_obj %}
       <div class="card">
         <div class="card_body">
@@ -25,7 +27,9 @@
               </a>
             {% endif %}
           </article>
-          <a href="{% url 'posts:post_detail' post.id %}" class="test_style">Подробная информация </a>
+          <a href="{% url 'posts:post_detail' post.id %}" class="test_style">
+            Подробная информация
+          </a>
         </div>
       </div>
       {% if not forloop.last %}<hr>{% endif %}

@@ -9,6 +9,7 @@ LMT_PSTS: int = 10  # limit posts per page
 
 
 def index(request):
+    """view main page."""
     template = 'posts/index.html'
     posts = Post.objects.select_related('group').all()
     paginator = Paginator(posts, LMT_PSTS)
@@ -25,22 +26,28 @@ def index(request):
 
 
 def group_posts(request, slug):
+    """view group page."""
     template = 'posts/group_list.html'
     group = get_object_or_404(Group, slug=slug)
     posts = group.group_list.all()
     paginator = Paginator(posts, LMT_PSTS)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    title = f'Группа {group.title}'
+    count = posts.select_related('group')
+    title = group.title
+    info = 'Записи сообщества: '
     context = {
         'group': group,
         'page_obj': page_obj,
         'title': title,
+        'count': count,
+        'info': info
     }
     return render(request, template, context)
 
 
 def profile(request, username):
+    """view profile page."""
     template = 'posts/profile.html'
     author = get_object_or_404(User, username=username)
     posts = author.posts.select_related('author')
@@ -58,9 +65,10 @@ def profile(request, username):
 
 
 def post_detail(request, post_id):
+    """view page selected post."""
     template = 'posts/post_detail.html'
     posts = get_object_or_404(Post, id=post_id)
-    title = f'Пост {posts.text[0:31]}'
+    title = f'Пост: {posts.text[0:30]}'
     author = posts.author
     cnt = author.posts.count()
     context = {
@@ -74,16 +82,34 @@ def post_detail(request, post_id):
 
 @login_required
 def post_create(request):
-    is_edit = False
+    """view creating a post."""
     template = 'posts/create_post.html'
     form = PostForm(request.POST or None)
     if form.is_valid():
         post = form.save(commit=False)
         post.author = request.user
         post.save()
-        return redirect('posts:profile', request.user.username)
+        return redirect('posts:profile', username=request.user.username)
     context = {
         'form': form,
-        'is_edit': is_edit,
+        'is_edit': False,
     }
+    return render(request, template, context)
+
+
+@login_required
+def post_edit(request, post_id):
+    """view post editing."""
+    template = 'posts/create_post.html'
+    required_post = Post.objects.get(id=post_id)
+    if required_post.author != request.user:
+        return redirect('posts:post_detail', post_id=post_id)
+    form = PostForm(request.POST or None, instance=required_post)
+    if form.is_valid():
+        form.save()
+        return redirect('posts:post_detail', post_id=post_id)
+    context = {
+        'form': form,
+        'required_post': required_post,
+        'is_edit': True}
     return render(request, template, context)

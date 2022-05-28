@@ -1,7 +1,8 @@
 import datetime
 
+
 def year(request):
-    """Добавляет переменную с текущим годом."""
+    """Adds a variable with the current year."""
     ye = datetime.datetime.now()
     actual_ye = int(ye.year)
     return {

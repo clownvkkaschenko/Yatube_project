@@ -9,8 +9,11 @@
     <div class="nav nav-pills">
       {% if user.is_authenticated %}
         <div class="nav-item">
-          <a class="head_swt"
-            href="{% url 'posts:profile' user %}">{{ user.username }}
+          <a class="head_swt
+            {% if author.username == user.username %}
+              active
+            {% endif %}"
+            href="{% url 'posts:profile' user %}">{{  user.username  }}
           </a>
         </div>
         <div class="nav-item">
