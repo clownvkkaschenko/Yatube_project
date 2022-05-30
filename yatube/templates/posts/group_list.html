@@ -2,7 +2,7 @@
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
   <div class="container py-3">
-    <h1 style="float:left;">{{  info  }}</h1><h1>{{ group.title }}</h1>
+    <h1 style="float:left;">Записи сообщества: </h1><h1>{{ title }}</h1>
     <p>{{ group.description }}</p>
     <p>Всего постов: {{ count.count }}</p>
     {% for post in page_obj %}

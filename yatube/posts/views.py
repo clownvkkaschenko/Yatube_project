@@ -5,22 +5,19 @@ from .forms import PostForm
 from .models import Post, Group, User
 
 
-LMT_PSTS: int = 10  # limit posts per page
+LMT_PSTS: int = 10
 
 
 def index(request):
     """view main page."""
     template = 'posts/index.html'
-    posts = Post.objects.select_related('group').all()
+    posts = Post.objects.select_related('group')
     paginator = Paginator(posts, LMT_PSTS)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    title = 'Главная страница YaTube'
-    text = 'Последние обновления на сайте'
     context = {
         'page_obj': page_obj,
-        'title': title,
-        'text': text,
+        'is_index': True,
     }
     return render(request, template, context)
 
@@ -29,19 +26,17 @@ def group_posts(request, slug):
     """view group page."""
     template = 'posts/group_list.html'
     group = get_object_or_404(Group, slug=slug)
-    posts = group.group_list.all()
+    posts = group.group_list.select_related('group')
     paginator = Paginator(posts, LMT_PSTS)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     count = posts.select_related('group')
     title = group.title
-    info = 'Записи сообщества: '
     context = {
         'group': group,
         'page_obj': page_obj,
         'title': title,
         'count': count,
-        'info': info
     }
     return render(request, template, context)
 
@@ -54,12 +49,11 @@ def profile(request, username):
     paginator = Paginator(posts, LMT_PSTS)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    title = 'профайл пользователя'
     context = {
-        'title': title,
         'author': author,
         'page_obj': page_obj,
         'posts': posts,
+        'is_profile': True,
     }
     return render(request, template, context)
 
@@ -111,5 +105,6 @@ def post_edit(request, post_id):
     context = {
         'form': form,
         'required_post': required_post,
-        'is_edit': True}
-    return render(request, template, context)
+        'is_edit': True,
+    }
+    return render(request, template,  context,)

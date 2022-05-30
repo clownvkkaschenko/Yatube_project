@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
-{% load tz %}
 {% block title %}
-  {{ author.get_full_name }}@{{  author.username  }}{{  title  }}
+  {{ author.get_full_name }}@{{  author.username  }} профайл пользователя
 {% endblock %}
 {% block content %}
   <div class="container py-3">
     <h1>Профиль пользователя: {{ author.get_full_name }}@{{  author.username  }} </h1>
-    <h3>Зарегестрировался на сайте: {{ author.date_joined|timezone:"Europe/Moscow" }} по мск.</h3>
+    <h3>Зарегестрировался на сайте: {% load tz %}{{ author.date_joined|timezone:"Europe/Moscow" }}(по мск.)</h3>
     <h5>Всего постов на этом сайте: {{ posts.count }} </h5>
     {% for post in page_obj %}
       <div class="card">

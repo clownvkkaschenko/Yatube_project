@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% block title %}{{ title }}{% endblock %}
+{% block title %}Главная страница YaTube{% endblock %}
 {% block header %}
-  {% include 'includes/header_index.html' %}
+  {% include 'includes/header.html' %}
 {% endblock %}
 {% block content %}
   <div class="parallax">
@@ -11,7 +11,7 @@
     <div class="mask"></div>
   </div>
   <div class="container py-3">
-    <h1 class="contents">{{ text }}</h1>
+    <h1 class="contents">Последние обновления на сайте</h1>
     {% for post in page_obj %}
       <div class="card">
         <div class="card_body">

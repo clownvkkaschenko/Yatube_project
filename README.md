@@ -17,7 +17,7 @@ $ python manage.py runserver
 ### Работа с миграциями
 - Из директории yatube_projects/yatube (в ней должен находиться файл manage.py) запустите команду создания скрипта миграций 
 ```
-python manage.py makemigrations
+$ python manage.py makemigrations
 ```
 - Теперь нужно запустить все миграции. Выполните команду migrate
 ```
