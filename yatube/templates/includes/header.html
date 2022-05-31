@@ -7,11 +7,11 @@
     </a>
     {% with request.resolver_match.view_name as view_name %}
       <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">
-          <a class="dropbtn">Меню</a>
+        <button class="menu_btn">
+          <img onclick="myFunction()" class="dropbtn" src="{% static 'img/mode/menu5.png' %}">
         </button>
-        {% if user.is_authenticated %}
-          <div id="myDropdown" class="nav-item">
+        <div id="myDropdown" class="nav-item">
+          {% if user.is_authenticated %}
             <a class="head_swt
               {% if view_name  == 'posts:post_create' %}
                 active
@@ -30,9 +30,7 @@
               {% endif %}"
               href="{% url 'about:exit' %}">Выйти
             </a>
-          </div>
-        {% else %}
-          <div class="nav-item">
+          {% else %}
             <a class="head_swt
               {% if view_name  == 'users:login' %}
                 active
@@ -45,8 +43,8 @@
               {% endif %}"
               href="{% url 'users:signup' %}">Регистрация
             </a>
-          </div>
-        {% endif %}
+          {% endif %}
+        </div>
       </div>
       <div class="nav nav-pills">
         {% if user.is_authenticated %}
@@ -61,7 +59,7 @@
     {% endwith %}
     <div class="MenuButton">
       <button id="theme-toggle">
-        <img src="{% static 'img/mode/moon.png' %}" id="tt-img"
+        <img src="{% static 'img/mode/moon.png' %}" id="tt-img">
       </button>
     </div>
   </div>

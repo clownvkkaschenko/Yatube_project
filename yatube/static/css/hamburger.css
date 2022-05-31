@@ -15,25 +15,7 @@ body.dark .svg_menu:hover {
     display: inline-block;
 }
 .dropbtn {
-    border-radius: 0px; 
-    width: 48px; 
-    height: 48px; 
-    border: none;
-    background-color: rgba(28,28,28,0);
-    cursor: pointer;
-}
-.dropbtn a {
-    color: #000;
-    display: block;
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 17px;
-}
-body.dark .dropbtn a {
-    color: #fff;
-    padding: 0.5rem 1rem;
+    width: 36px;
 }
 .nav-item a {
     padding: 12px 16px;
@@ -58,4 +40,14 @@ body.dark .dropbtn a {
 }
 body.dark .nav-item {
     background-color: rgb(55, 55, 55);
+}
+.menu_btn {
+    transition: 0.5s;
+    background: none;
+    border: none;
+    background-color: lightskyblue;
+}
+body.dark .menu_btn {
+    transition: 0.5s;
+    background-color: rgb(65, 65, 72);
 }
