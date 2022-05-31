@@ -1,0 +1,61 @@
+body.dark .svg_menu {
+    color: #fff;
+}
+body.dark .svg_menu:hover {
+    color: rgb(176, 175, 175);
+}
+.svg_menu {
+    color: rgb(88, 80, 80);
+}
+.svg_menu:hover {
+    color: #000;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropbtn {
+    border-radius: 0px; 
+    width: 48px; 
+    height: 48px; 
+    border: none;
+    background-color: rgba(28,28,28,0);
+    cursor: pointer;
+}
+.dropbtn a {
+    color: #000;
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 17px;
+}
+body.dark .dropbtn a {
+    color: #fff;
+    padding: 0.5rem 1rem;
+}
+.nav-item a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.nav-item {
+    display: none;
+    left: 0;
+    overflow: auto;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+.nav-item a:hover {
+    background-color: rgba(28,28,28,0)
+}
+.show {
+    display: block;
+}
+body.dark .nav-item {
+    background-color: rgb(55, 55, 55);
+}

@@ -107,4 +107,4 @@ def post_edit(request, post_id):
         'required_post': required_post,
         'is_edit': True,
     }
-    return render(request, template,  context,)
+    return render(request, template, context,)

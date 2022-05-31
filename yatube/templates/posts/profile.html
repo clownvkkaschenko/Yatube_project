@@ -11,24 +11,29 @@
       <div class="card">
         <div class="card_body">
           <article>
-            <ul style="padding-left: 0">
-              <li class="left" style="list-style-type: none">
-                Автор: {{ author.get_full_name }}@{{  author.username  }}
-              </li>
-              <li class="right" style="list-style-type: none">
-                Дата публикации: {{ post.pub_date|date:"d E Y, H:i" }}
-              </li>
-            </ul>
-            <p class="justify">{{ post.text }}</p>
-            {% if post.group %}
+            <div class="right">
+              {% if post.group %}   
               <a href="{% url 'posts:group_list' post.group.slug %}" class="test_style">
-                {{  post.group  }}
+                {{ post.group }}
               </a>
-            {% endif %}
+              {% endif %}
+            </div>
+            <div class="left">
+              <a>
+                {{ post.author.get_full_name }} @{{ post.author.username }}
+              </a>
+            </div>
+            <p class="justify">{{ post.text }}</p>
+            <div class="left">
+              <a>Комментарии</a>
+            </div>
           </article>
-          <a href="{% url 'posts:post_detail' post.id %}" class="test_style">
+          <a style="float:left" href="{% url 'posts:post_detail' post.id %}" class="test_style">
             Подробная информация
           </a>
+          <div class="right">
+            {{ post.pub_date|date:"d E Y, H:i" }}
+          </div>
         </div>
       </div>
       {% if not forloop.last %}<hr>{% endif %}

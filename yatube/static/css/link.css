@@ -1,5 +1,4 @@
 .link_about {
-    transition: 0.5s;
     color: #000;
     position: relative;
     cursor: pointer;
@@ -10,7 +9,6 @@
     color: #00aeff;
 }
 body.dark .link_about {
-    transition: 0.5s;
     color: #fff;
 }
 body.dark .link_about:hover {

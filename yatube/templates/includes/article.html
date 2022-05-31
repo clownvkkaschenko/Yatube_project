@@ -1,10 +1,19 @@
+<div class="right">
+  {% if post.group %}   
+  <a href="{% url 'posts:group_list' post.group.slug %}" class="test_style">
+    {{ post.group }}
+  </a>
+  {% endif %}
+</div>
 <div class="left">
-  Автор: 
   <a href="{% url 'posts:profile' post.author %}" class="test_style">
     {{ post.author.get_full_name }} @{{ post.author.username }}
   </a>
 </div>
-<div class="right">
-  Дата публикации: {{ post.pub_date|date:"d E Y, H:i" }}
-</div>
 <p class="justify">{{ post.text }}</p>
+<div class="right">
+  {{ post.pub_date|date:"d E Y, H:i" }}
+</div>
+<div class="left">
+  <a>Комментарии</a>
+</div>

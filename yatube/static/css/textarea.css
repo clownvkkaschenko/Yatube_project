@@ -14,6 +14,9 @@
     font-family: Verdana;
     font-size: 17;
 }
+.txta {
+    transition: 0.5s;
+}
 body.dark .txta{
     transition: 0.5s;
     background-color: rgb(67, 67, 67);
