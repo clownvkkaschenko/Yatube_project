@@ -6,7 +6,23 @@
   <div class="container py-3">
     <h1>Профиль пользователя: {{ author.get_full_name }}@{{  author.username  }} </h1>
     <h3>Зарегестрировался на сайте: {% load tz %}{{ author.date_joined|timezone:"Europe/Moscow" }}(по мск.)</h3>
-    <h5>Всего постов на этом сайте: {{ posts.count }} </h5>
+    {% if request.user.is_authenticated == True %}
+      <h5>{{ status }}</h5>
+    {% else %}
+      <h5>Offline</h5>
+    {% endif %}
+    {% if posts.count == 0 %}
+      <div class="row">
+        <aside class="col-12 col-md-4">
+          <img align="right" src="/static/img/mode/cat.jpg">
+        </aside>
+        <article class="col-12 col-md-8">
+          <h5 style="text-align:left"> Котик в недоумении, почему тут нет ни одного поста?</h5>
+        </article>
+      </div>
+    {% else %}
+      <h5>Всего постов на этом сайте: {{ posts.count }} </h5>  
+    {% endif %}
     {% for post in page_obj %}
       <div class="card">
         <div class="card_body">
@@ -24,9 +40,6 @@
               </a>
             </div>
             <p class="justify">{{ post.text }}</p>
-            <div class="left">
-              <a>Комментарии</a>
-            </div>
           </article>
           <a style="float:left" href="{% url 'posts:post_detail' post.id %}" class="test_style">
             Подробная информация

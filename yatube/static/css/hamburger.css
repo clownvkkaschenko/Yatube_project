@@ -45,9 +45,13 @@ body.dark .nav-item {
     transition: 0.5s;
     background: none;
     border: none;
-    background-color: lightskyblue;
+    -webkit-transition: -webkit-transform .2s ease-in-out;
+    transition:         transform .2s ease-in-out;
+}
+.menu_btn:hover {
+    -webkit-transform: rotate(20deg);
+            transform: rotate(20deg);
 }
 body.dark .menu_btn {
     transition: 0.5s;
-    background-color: rgb(65, 65, 72);
 }

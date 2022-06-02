@@ -15,5 +15,7 @@
   {{ post.pub_date|date:"d E Y, H:i" }}
 </div>
 <div class="left">
-  <a>Комментарии</a>
+  <a style="float:left" href="{% url 'posts:post_detail' post.id %}" class="test_style">
+    Подробная информация
+  </a>
 </div>
