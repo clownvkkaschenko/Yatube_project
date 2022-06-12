@@ -10,13 +10,13 @@
       <h5>Всего постов на этом сайте: {{ posts.count }} </h5>
     {% endif %}<hr>
     {% if posts.count == 0 %}
-      <div class="row">
-        <aside class="col-12 col-md-4">
-          <img width="350" align="left" src="/static/img/mode/cat.jpg">
-        </aside>
-        <article class="col-12 col-md-8">
-          <h5 style="text-align:left"> Котик в недоумении, почему тут нет ни одного поста?</h5>
-        </article>
+      <div>
+        <img align="left" width="350" src="/static/img/mode/cat.jpg">
+        <div class="row">
+          <article class="col-12 col-md-8">
+            <h5 style="text-align:left"> Котик в недоумении, почему тут нет ни одного поста?</h5>
+          </article>
+        </div>
       </div> 
     {% endif %}
     {% for post in page_obj %}
@@ -38,7 +38,7 @@
             <p class="justify">{{ post.text }}</p>
           </article>
           <a style="float:left" href="{% url 'posts:post_detail' post.id %}" class="test_style">
-            Подробная информация
+            Post info
           </a>
           <div class="right">
             {{ post.pub_date|date:"d E Y, H:i" }}

@@ -4,12 +4,11 @@ from django.contrib.auth.decorators import login_required
 from .forms import PostForm
 from .models import Post, Group, User
 
-
 LMT_PSTS: int = 10
 
 
 def index(request):
-    """view main page."""
+    """View main page."""
     template = 'posts/index.html'
     posts = Post.objects.select_related('group')
     paginator = Paginator(posts, LMT_PSTS)
@@ -23,7 +22,7 @@ def index(request):
 
 
 def group_posts(request, slug):
-    """view group page."""
+    """View group page."""
     template = 'posts/group_list.html'
     group = get_object_or_404(Group, slug=slug)
     posts = group.group_list.select_related('group')
@@ -42,7 +41,7 @@ def group_posts(request, slug):
 
 
 def profile(request, username):
-    """view profile page."""
+    """View profile page."""
     template = 'posts/profile.html'
     author = get_object_or_404(User, username=username)
     posts = author.posts.select_related('author')
@@ -59,7 +58,7 @@ def profile(request, username):
 
 
 def post_detail(request, post_id):
-    """view page selected post."""
+    """View page selected post."""
     template = 'posts/post_detail.html'
     posts = get_object_or_404(Post, id=post_id)
     title = f'Пост: {posts.text[0:30]}'
@@ -76,7 +75,7 @@ def post_detail(request, post_id):
 
 @login_required
 def post_create(request):
-    """view creating a post."""
+    """View creating a post."""
     template = 'posts/create_post.html'
     form = PostForm(request.POST or None)
     if form.is_valid():
@@ -93,7 +92,7 @@ def post_create(request):
 
 @login_required
 def post_edit(request, post_id):
-    """view post editing."""
+    """View post editing."""
     template = 'posts/create_post.html'
     required_post = Post.objects.get(id=post_id)
     if required_post.author != request.user:

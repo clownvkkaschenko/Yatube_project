@@ -19,8 +19,8 @@ class PostModelTest(TestCase):
             text='Тестовый пост для проверки метода __str__'
         )
 
-    def test_models_have_correct_object_names(self):
-        """Проверяем, что у моделей корректно работает __str__."""
+    def test_post_and_group_models_have_correct_object_names(self):
+        """Checking, that __str__ works correctly for models."""
         post = self.post
         group = self.group
         field_verboses = {
@@ -32,11 +32,12 @@ class PostModelTest(TestCase):
                 self.assertEqual(
                     value,
                     expected,
-                    'Метод test_models_have_correct_object_names не работает'
+                    'Метод test_models_have_correct_object_names '
+                    'работает неправильно.'
                 )
 
     def test_group_verbose_name(self):
-        """Group_verbose_name в полях совпадает с ожидаемым."""
+        """Group_verbose_name in the margins is the same as expected."""
         group = PostModelTest.group
         field_verboses = {
             'title': 'Имя сообщества',
@@ -48,11 +49,11 @@ class PostModelTest(TestCase):
                 self.assertEqual(
                     group._meta.get_field(field).verbose_name,
                     expected_value,
-                    'Метод test_group_verbose_name работает неправильно'
+                    'Метод test_group_verbose_name работает неправильно.'
                 )
 
     def test_post_verbose_name(self):
-        """Post_verbose_name в полях совпадает с ожидаемым."""
+        """Post_verbose_name in the margins is the same as expected."""
         post = PostModelTest.post
         field_verboses = {
             'text': 'Текст поста',
@@ -65,5 +66,5 @@ class PostModelTest(TestCase):
                 self.assertEqual(
                     post._meta.get_field(field).verbose_name,
                     expected_value,
-                    'Метод test_post_verbose_name работает неправильно'
+                    'Метод test_post_verbose_name работает неправильно.'
                 )

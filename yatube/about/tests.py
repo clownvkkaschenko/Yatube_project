@@ -1,5 +1,4 @@
 from django.test import TestCase, Client
-
 from http import HTTPStatus
 
 
@@ -8,7 +7,7 @@ class AboutPagesURLTests(TestCase):
         self.guest_client = Client()
 
     def test_about_urls_uses_correct_template(self):
-        """URL-адреса приложения about используют соответствующий шаблон."""
+        """URL-application address about use the corresponding pattern."""
         templates_url_names = {
             '/about/author/': 'about/author.html',
             '/about/tech/': 'about/tech.html',
@@ -20,11 +19,12 @@ class AboutPagesURLTests(TestCase):
                 self.assertTemplateUsed(
                     response,
                     template,
-                    'Метод test_about_urls_uses_correct_template работает неправильно'
+                    'Метод test_about_urls_uses_correct_template '
+                    'работает неправильно.'
                 )
 
     def test_about_of_accessible_pages(self):
-        """Проверка доступности адреса."""
+        """Address availability check."""
         available_pages = {
             '/about/author/': HTTPStatus.OK,
             '/about/tech/': HTTPStatus.OK,
@@ -36,5 +36,6 @@ class AboutPagesURLTests(TestCase):
                 self.assertEqual(
                     response,
                     expected_status_code,
-                    'Метод test_about_of_accessible_pages работает неправильно'
+                    'Метод test_about_of_accessible_pages '
+                    'работает неправильно.'
                 )

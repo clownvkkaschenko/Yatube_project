@@ -1,5 +1,5 @@
 <div class="right">
-  {% if post.group %}   
+  {% if post.group %}
   <a href="{% url 'posts:group_list' post.group.slug %}" class="test_style">
     {{ post.group }}
   </a>
@@ -15,7 +15,7 @@
   {{ post.pub_date|date:"d E Y, H:i" }}
 </div>
 <div class="left">
-  <a style="float:left" href="{% url 'posts:post_detail' post.id %}" class="test_style">
-    Подробная информация
+  <a href="{% url 'posts:post_detail' post.id %}" class="test_style">
+    Post info
   </a>
 </div>
