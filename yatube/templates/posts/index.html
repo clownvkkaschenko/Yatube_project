@@ -4,6 +4,12 @@
   {% include 'includes/header.html' %}
 {% endblock %}
 {% block content %}
+  <div class="parallax">
+    <h1 class="sigmar">
+      Social network YaTube
+    </h1>
+    <div class="mask"></div>
+  </div>
   <div class="container py-3">
     <h1 class="contents">Последние обновления на сайте</h1>
     {% for post in page_obj %}

@@ -1,5 +1,9 @@
 {% load static %}
-  <nav class="navbar_group navbar-light">
+  {% if is_index %}
+    <nav class="navbar navbar-light">
+  {% else %}
+    <nav class="navbar_group navbar-light">
+  {% endif %}
   <div class="container">
     <a class="navbar-brand" href="{% url 'posts:index' %}">
       <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -8,7 +12,7 @@
     {% with request.resolver_match.view_name as view_name %}
       <div class="dropdown">
         <button class="menu_btn">
-          <img onclick="myFunction()" class="dropbtn" src="{% static 'img/mode/menu5.png' %}">
+          <img onclick="myFunction()" class="dropbtn" src="{% static 'img/mode/menu5.png' %}" id="menu-icon">
         </button>
         <div id="myDropdown" class="nav-item">
           {% if user.is_authenticated %}

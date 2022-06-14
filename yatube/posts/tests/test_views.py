@@ -6,8 +6,9 @@ from django import forms
 from posts.models import Post, Group
 
 User = get_user_model()
+
+TOTAL_TEST_PAGES: int = 13
 LMT_PSTS_FRST_PG: int = 10
-LMT_PSTS_SCND_PG: int = 3
 
 
 class PostsPagesTests(TestCase):
@@ -143,17 +144,15 @@ class PaginatorViewsTest(TestCase):
             slug='tests_tests_and_tests',
             description='описание тестов'
         )
-        self.post = Post.objects.create(
-            text='Интересная, но сложная вещь, эти тесты...',
-            author=self.user,
-            group=self.group
+        self.post = Post.objects.bulk_create(
+            [
+                Post(
+                    text='Интересная, но сложная вещь, эти тесты...',
+                    author=self.user,
+                    group=self.group,
+                ),
+            ] * TOTAL_TEST_PAGES
         )
-        for v in range(1, 13):
-            self.post = Post.objects.create(
-                text=f'Тест номер {v}',
-                author=self.user,
-                group=self.group
-            )
 
     def test_first_page_contains_ten_records(self):
         """The number of posts on the first page is 10."""
@@ -161,10 +160,10 @@ class PaginatorViewsTest(TestCase):
             reverse('posts:index'): LMT_PSTS_FRST_PG,
             reverse(
                 'posts:group_list',
-                kwargs={'slug': self.post.group.slug}): LMT_PSTS_FRST_PG,
+                kwargs={'slug': self.group.slug}): LMT_PSTS_FRST_PG,
             reverse(
                 'posts:profile',
-                kwargs={'username': self.post.author}): LMT_PSTS_FRST_PG,
+                kwargs={'username': self.user.username}): LMT_PSTS_FRST_PG,
         }
         for reverse_name, cnt_of_posts in paginators_list.items():
             with self.subTest(reverse_name=reverse_name):
@@ -175,14 +174,18 @@ class PaginatorViewsTest(TestCase):
 
     def test_first_page_contains_ten_records(self):
         """The number of posts on the second page is 3."""
+        all_posts = Post.objects.filter(
+            author__username=self.user.username
+        ).count()
+        lmt_psts_scnd_pg: int = all_posts - LMT_PSTS_FRST_PG
         paginators_list = {
-            reverse('posts:index'): LMT_PSTS_SCND_PG,
+            reverse('posts:index'): lmt_psts_scnd_pg,
             reverse(
                 'posts:group_list',
-                kwargs={'slug': self.post.group.slug}): LMT_PSTS_SCND_PG,
+                kwargs={'slug': self.group.slug}): lmt_psts_scnd_pg,
             reverse(
                 'posts:profile',
-                kwargs={'username': self.post.author}): LMT_PSTS_SCND_PG,
+                kwargs={'username': self.user.username}): lmt_psts_scnd_pg,
         }
         for reverse_name, cnt_of_posts in paginators_list.items():
             with self.subTest(reverse_name=reverse_name):

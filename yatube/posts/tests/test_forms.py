@@ -61,6 +61,9 @@ class PostsPagesTests(TestCase):
         self.assertEqual(Post.objects.count(), posts_count + 1)
         self.assertEqual(new_post.text, form_data['text'])
         self.assertEqual(new_post.group.id, form_data['group'])
+
+    def test_creating_a_post_is_not_available_to_an_unauthorized_user(self):
+        """A valid post creation form is not available to an unauthorized user."""
         response_unauthorized_user = self.guest_client.get('/create/')
         self.assertEqual(
             response_unauthorized_user.status_code,
@@ -87,6 +90,9 @@ class PostsPagesTests(TestCase):
         self.assertEqual(Post.objects.count(), posts_count)
         self.assertEqual(post.text, form_data['text'])
         self.assertEqual(post.group.id, form_data['group'])
+
+    def  test_editing_a_post_is_not_available_to_an_unauthorized_user(self):
+        """Valid post editing form is not available to an unauthorized user."""
         response_unauthorized_user = self.guest_client.get(
             f'/posts/{self.post.id}/edit/'
         )
