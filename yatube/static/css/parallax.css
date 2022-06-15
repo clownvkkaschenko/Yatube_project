@@ -1,11 +1,11 @@
 .navbar {
     transition: 0.5s;
-    background-image: url('https://images.pexels.com/photos/3789871/pexels-photo-3789871.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background-image: url("/static/img/mode/navbar.jpg");
     background-attachment: fixed; 
 }
 .parallax {
     transition: 0.5s;
-    background-image: url('https://images.pexels.com/photos/3789871/pexels-photo-3789871.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background-image: url("/static/img/mode/navbar.jpg");
     height: 250px;
     background-attachment: fixed;
     display: flex;
@@ -27,7 +27,7 @@
     font-size: 80px;
     text-align: center;
     font-weight: bolder;
-    background: url('https://images.pexels.com/photos/2832084/pexels-photo-2832084.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background: url("/static/img/mode/navbar-anim.png");
     color: transparent;
     -webkit-background-clip: text;
             background-clip: text;
@@ -43,12 +43,12 @@
 }
 body.dark .navbar {
     transition: 0.5s;
-    background-image: url('https://w.wallhaven.cc/full/e7/wallhaven-e7ek7k.jpg');
+    background-image: url("/static/img/mode/dark-navbar.jpg");
     background-attachment: fixed; 
 }
 body.dark .parallax {
     transition: 0.5s;
-    background-image: url('https://w.wallhaven.cc/full/e7/wallhaven-e7ek7k.jpg');
+    background-image: url("/static/img/mode/dark-navbar.jpg");
     height: 250px;
     background-attachment: fixed;
     display: flex;
@@ -64,7 +64,7 @@ body.dark .sigmar {
     font-size: 80px;
     text-align: center;
     font-weight: bolder;
-    background: url('https://w.wallhaven.cc/full/96/wallhaven-968ol8.jpg');
+    background: url("/static/img/mode/dark-navbar-anim.jpg");
     color: transparent;
     -webkit-background-clip: text;
             background-clip: text;

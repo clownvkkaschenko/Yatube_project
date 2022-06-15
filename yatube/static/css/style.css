@@ -1,8 +1,3 @@
-.navbar {
-    transition: 0.5s;
-    background-image: url('https://images.pexels.com/photos/3789871/pexels-photo-3789871.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
-    background-attachment: fixed; 
-}
 .head_swt {
     color: rgb(98, 98, 98);
     display: block;
@@ -45,7 +40,6 @@
 div.card {
     color: #000;
     transition: 0.5s;
-    padding: 17px 16px 15px 16px;
     border: 1px solid lightskyblue;
     border-radius: 0.55em;
 }
@@ -56,11 +50,12 @@ div.card_logget {
     border-radius: 0.55em;
 }
 .justify {
+    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
     text-align: justify;
     white-space: pre-line;
     word-wrap: break-word;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 .footer {
     margin-bottom: -0.3%;
@@ -70,9 +65,11 @@ h1, h2, h3, h4, h5, p {
     font-family: Arial;
 }
 .left {
+    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
     text-align: left; 
 }
 .right {
+    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
     float: right;
 }
 html, body {
@@ -106,7 +103,6 @@ html, body {
 body.dark div.card {
     transition: 0.5s;
     color: #fff;
-    padding: 17px 16px 15px 16px;
     border: 1px solid lightskyblue;
     border-radius: 0.55em;
     background-color: rgb(36, 36, 36);

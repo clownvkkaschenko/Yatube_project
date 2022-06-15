@@ -77,7 +77,7 @@ def post_detail(request, post_id):
 def post_create(request):
     """View creating a post."""
     template = 'posts/create_post.html'
-    form = PostForm(request.POST or None)
+    form = PostForm(request.POST or None, files=request.FILES or None)
     if form.is_valid():
         post = form.save(commit=False)
         post.author = request.user
@@ -97,7 +97,11 @@ def post_edit(request, post_id):
     required_post = Post.objects.get(id=post_id)
     if required_post.author != request.user:
         return redirect('posts:post_detail', post_id=post_id)
-    form = PostForm(request.POST or None, instance=required_post)
+    form = PostForm(
+        request.POST or None,
+        files=request.FILES or None,
+        instance=required_post
+    )
     if form.is_valid():
         form.save()
         return redirect('posts:post_detail', post_id=post_id)
