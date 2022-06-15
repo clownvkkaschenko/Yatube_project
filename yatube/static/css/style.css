@@ -43,19 +43,13 @@ div.card {
     border: 1px solid lightskyblue;
     border-radius: 0.55em;
 }
-div.card_logget {
-    color: #000;
-    transition: 0.5s;
-    border: 1px solid lightskyblue;
-    border-radius: 0.55em;
-}
 .justify {
-    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
+    padding: 0.3rem 0.7rem 0.3rem 0.7rem;
     text-align: justify;
     white-space: pre-line;
     word-wrap: break-word;
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
 .footer {
     margin-bottom: -0.3%;
@@ -65,11 +59,11 @@ h1, h2, h3, h4, h5, p {
     font-family: Arial;
 }
 .left {
-    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
+    padding: 0.3rem 0.7rem 0.3rem 0.7rem;
     text-align: left; 
 }
 .right {
-    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
+    padding: 0.3rem 0.7rem 0.3rem 0.7rem;
     float: right;
 }
 html, body {
@@ -136,12 +130,6 @@ body.dark .tube {
 body.dark .navbar_group {
     transition: 0.5s;
     background-color: rgb(65, 65, 72);
-}
-body.dark .card_logget {
-    color: #fff;
-    transition: 0.5s;
-    border: 1px solid lightskyblue;
-    border-radius: 0.55em;
 }
 body.dark .card-header{
     padding: .5rem 1rem;

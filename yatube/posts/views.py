@@ -1,8 +1,8 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import PostForm
-from .models import Post, Group, User
+from .forms import CommentForm, PostForm
+from .models import Comment, Post, Group, User
 
 LMT_PSTS: int = 10
 
@@ -16,7 +16,7 @@ def index(request):
     page_obj = paginator.get_page(page_number)
     context = {
         'page_obj': page_obj,
-        'is_index': True,
+        'is_index': True
     }
     return render(request, template, context)
 
@@ -64,11 +64,17 @@ def post_detail(request, post_id):
     title = f'Пост: {posts.text[0:30]}'
     author = posts.author
     cnt = author.posts.count()
+    form = CommentForm(request.POST or None)
+    comment = Comment.objects.filter(post_id=post_id)
+    comment_cnt = comment.count()
     context = {
         'posts': posts,
         'title': title,
         'author': author,
         'cnt': cnt,
+        'form': form,
+        'comments': comment,
+        'comment_cnt': comment_cnt
     }
     return render(request, template, context)
 
@@ -111,3 +117,14 @@ def post_edit(request, post_id):
         'is_edit': True,
     }
     return render(request, template, context,)
+
+@login_required
+def add_comment(request, post_id):
+    posts = get_object_or_404(Post, pk=post_id)
+    form = CommentForm(request.POST or None)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.author = request.user
+        comment.post = posts
+        comment.save()
+    return redirect('posts:post_detail', post_id=post_id)

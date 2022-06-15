@@ -2,7 +2,6 @@
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
   {% load thumbnail %}
-  {% load user_filters %}
   <div class="container py-5">
     <div class="row">
       <aside class="col-12 col-md-4">
@@ -40,8 +39,9 @@
           <a class="btn btn-primary" href="{% url 'posts:post_edit' posts.id %}">
             Редактировать запись
           </a> 
-        {% endif %}
-      </article> 
+        {% endif %}<br>
+        {% include 'includes/comment.html' %}
+      </article>
     </div> 
   </div> 
 {% endblock %}
