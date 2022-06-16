@@ -4,7 +4,7 @@
   {% load thumbnail %}
   <div class="container py-5">
     <div class="row">
-      <aside class="col-12 col-md-4">
+      <aside class="col-md-4">
         <ul class="list-group list-group-flush">
           <li class="techdark list-group-item">
             Дата публикации: {{ posts.pub_date|date:"d E Y, H:i" }}
@@ -28,20 +28,41 @@
           </li>
         </ul>
       </aside>
-      <article class="col-12 col-md-8">
+      <article class="col-md-8">
         <div class="card">
           {% thumbnail posts.image "1280x420" crop="center" upscale=True as im %}
             <img style="border-radius: 0.55em 0.55em 0.35em 0.35em;" class="card-img my-0" src="{{ im.url }}">
           {% endthumbnail %}
+          <div class="col">
+            <div class="right">
+              {% if posts.group %}
+              <a href="{% url 'posts:group_list' posts.group.slug %}" class="test_style">
+                {{ posts.group }}
+              </a>
+              {% endif %}
+            </div>
+            <div class="left">
+              <a href="{% url 'posts:profile' posts.author %}" class="test_style">
+                {{ posts.author.get_full_name }} @{{ posts.author.username }}
+              </a>
+            </div>
+          </div>
           <p class="justify">{{  posts.text  }}</p>
+          <div class="col">
+            <div class="right">
+              {{ posts.pub_date|date:"d E Y, H:i" }}
+            </div>
+            {% if author.username == user.username %}
+              <div class="left">
+                <a href="{% url 'posts:post_edit' posts.id %}" class="test_style">
+                  Редактировать запись
+                </a>
+              </div>
+            {% endif %}
+          </div>
         </div><br>
-        {% if author.username == user.username %}
-          <a class="btn btn-primary" href="{% url 'posts:post_edit' posts.id %}">
-            Редактировать запись
-          </a> 
-        {% endif %}<br>
         {% include 'includes/comment.html' %}
       </article>
-    </div> 
-  </div> 
+    </div>  <!-- row -->
+  </div>  <!-- container -->
 {% endblock %}

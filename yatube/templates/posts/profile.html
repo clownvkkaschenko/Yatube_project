@@ -44,7 +44,7 @@
           </div>
           <div class="left">
             <a href="{% url 'posts:post_detail' post.id %}" class="test_style">
-              Комментарии
+              Комментарии({{ post.comments.count }})
             </a>
           </div>
         </article>
@@ -52,5 +52,5 @@
       {% if not forloop.last %}<hr>{% endif %}
     {% endfor %}
     {% include 'includes/paginator.html' %}
-  </div>
+  </div>  <!-- container -->
 {% endblock %}

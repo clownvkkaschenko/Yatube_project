@@ -1,8 +1,8 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import CommentForm, PostForm
-from .models import Comment, Post, Group, User
+from posts.forms import CommentForm, PostForm
+from posts.models import Comment, Post, Group, User
 
 LMT_PSTS: int = 10
 
@@ -117,6 +117,7 @@ def post_edit(request, post_id):
         'is_edit': True,
     }
     return render(request, template, context,)
+
 
 @login_required
 def add_comment(request, post_id):

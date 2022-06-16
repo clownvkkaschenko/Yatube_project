@@ -1,12 +1,13 @@
-{% load thumbnail %}
+<article>
+  {% load thumbnail %}
   {% thumbnail post.image "1280x420" crop="center" upscale=True as im %}
     <img class="card-img my-0" style="border-radius: 0.55em 0.55em 0.35em 0.35em;" src="{{ im.url }}">
   {% endthumbnail %}
   <div class="right">
     {% if post.group %}
-    <a href="{% url 'posts:group_list' post.group.slug %}" class="test_style">
-      {{ post.group }}
-    </a>
+      <a href="{% url 'posts:group_list' post.group.slug %}" class="test_style">
+        {{ post.group }}
+      </a>
     {% endif %}
   </div>
   <div class="left">
@@ -23,3 +24,4 @@
       Комментарии({{ post.comments.count }})
     </a>
   </div>
+</article>
