@@ -11,10 +11,6 @@ class PostForm(forms.ModelForm):
             'group': 'Выберите группу',
             'image': 'Ваше изображение будет показано в разрешении 1280x420'
         }
-        help_texts = {
-            'text': 'Текст вашего поста',
-            'group': 'Группа, к которой будет относиться пост',
-        }
 
 
 class CommentForm(forms.ModelForm):

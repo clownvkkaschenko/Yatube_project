@@ -1,7 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
 from django import forms
+from django.core.cache import cache
 
 from posts.models import Post, Group
 
@@ -21,6 +23,19 @@ class PostsPagesTests(TestCase):
         self.authorized_client = Client()
         self.user = User.objects.create_user(username='Ёжик')
         self.authorized_client.force_login(self.user)
+        image = (            
+             b'\x47\x49\x46\x38\x39\x61\x02\x00'
+             b'\x01\x00\x80\x00\x00\x00\x00\x00'
+             b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
+             b'\x00\x00\x00\x2C\x00\x00\x00\x00'
+             b'\x02\x00\x01\x00\x00\x02\x02\x0C'
+             b'\x0A\x00\x3B'
+        )
+        uploaded = SimpleUploadedFile(
+            name='test.jpg',
+            content=image,
+            content_type='image/jpg'
+        )
         self.group = Group.objects.create(
             title='Сообщество для тестов',
             slug='tests_tests_and_tests',
@@ -29,11 +44,13 @@ class PostsPagesTests(TestCase):
         self.post = Post.objects.create(
             text='Интересная, но сложная вещь, эти тесты...',
             author=self.user,
-            group=self.group
+            group=self.group,
+            image=uploaded
         )
 
     def test_page_uses_correct_template(self):
         """URL-address uses the appropriate pattern."""
+        cache.clear()
         templates_pages_names = {
             reverse('posts:index'): 'posts/index.html',
             reverse(
@@ -64,12 +81,31 @@ class PostsPagesTests(TestCase):
                     'работает неправильно.'
                 )
 
+    def test_homepage_caching_check(self):
+        """Checking the caching of the main page"""
+        response_first = self.authorized_client.get(reverse('posts:index'))
+        post = response_first.content
+        Post.objects.create(
+            text=self.post.text,
+            author=self.post.author,
+        )
+        response_second = self.authorized_client.get(reverse('posts:index'))
+        second_post = response_second.content
+        self.assertEqual(post, second_post)
+        cache.clear()
+        response_third = self.authorized_client.get(reverse('posts:index'))
+        third_post = response_third.content
+        self.assertNotEqual(second_post, third_post)
+
     def test_index_page_show_correct_context(self):
         """The index template is formed with the correct context."""
+        cache.clear()
         response = self.authorized_client.get(reverse('posts:index'))
         first_object = response.context['page_obj'][0]
         post_text_0 = first_object.text
+        post_image_0 = first_object.image 
         self.assertEqual(post_text_0, self.post.text)
+        self.assertEqual(post_image_0, self.post.image)
 
     def test_group_list_page_show_correct_context(self):
         """The group_list template is formed with the correct context."""
@@ -81,8 +117,10 @@ class PostsPagesTests(TestCase):
         first_object = response.context['page_obj'][0]
         group_title_0 = first_object.group.title
         post_text_0 = first_object.text
+        post_image_0 = first_object.image
         self.assertEqual(group_title_0, self.post.group.title)
         self.assertEqual(post_text_0, self.post.text)
+        self.assertEqual(post_image_0, self.post.image)
 
     def test_profile_page_show_correct_context(self):
         """The profile template is formed with the correct context."""
@@ -94,8 +132,10 @@ class PostsPagesTests(TestCase):
         first_object = response.context['page_obj'][0]
         post_text_0 = first_object.text
         post_author_0 = first_object.author
+        post_image_0 = first_object.image
         self.assertEqual(post_text_0, self.post.text)
         self.assertEqual(post_author_0, self.post.author)
+        self.assertEqual(post_image_0, self.post.image)
 
     def test_post_detail_page_show_correct_context(self):
         """The post_detail template is formed with the correct context."""
@@ -105,6 +145,7 @@ class PostsPagesTests(TestCase):
                 kwargs={'post_id': self.post.id})
         )
         self.assertEqual(response.context.get('posts').text, self.post.text)
+        self.assertEqual(response.context.get('posts').image, self.post.image)
 
     def test_post_create_page_show_correct_context(self):
         """The post_create template is formed with the correct context."""
@@ -112,6 +153,7 @@ class PostsPagesTests(TestCase):
         form_fields = {
             'text': forms.fields.CharField,
             'group': forms.fields.ChoiceField,
+            'image': forms.fields.ImageField
         }
         for value, expected in form_fields.items():
             with self.subTest(value=value):
@@ -126,6 +168,7 @@ class PostsPagesTests(TestCase):
         form_fields = {
             'text': forms.fields.CharField,
             'group': forms.fields.ChoiceField,
+            'image': forms.fields.ImageField
         }
         for value, expected in form_fields.items():
             with self.subTest(value=value):

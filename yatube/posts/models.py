@@ -21,7 +21,10 @@ class Group(models.Model):
 
 class Post(CreatedModel):
     """Class for creating posts."""
-    text = models.TextField('Текст поста')
+    text = models.TextField(
+        'Текст поста',
+        help_text='Текст вашего поста'
+    )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -34,6 +37,7 @@ class Post(CreatedModel):
         blank=True, null=True,
         related_name='group_list',
         verbose_name='Сообщество поста',
+        help_text='Группа, к которой будет относиться пост'
     )
     image = models.ImageField(
         'Картинка',
@@ -66,7 +70,8 @@ class Comment(models.Model):
     )
     created = models.DateTimeField(
         'Дата создания',
-        auto_now_add=True
+        auto_now_add=True,
+        db_index=True
     )
     text = models.TextField(
         'Текст комментария',

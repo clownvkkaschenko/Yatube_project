@@ -7,7 +7,7 @@
     .parallax {
         transition: 0.5s;
         background-image: url("/static/img/mode/navbar.jpg");
-        height: 250px;
+        height: 270px;
         background-attachment: fixed;
         display: flex;
         justify-content: center;
@@ -50,7 +50,6 @@
     body.dark .parallax {
         transition: 0.5s;
         background-image: url("/static/img/mode/dark-navbar.jpg");
-        height: 250px;
         background-attachment: fixed;
         display: flex;
         justify-content: center;

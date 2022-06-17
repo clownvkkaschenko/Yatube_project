@@ -2,9 +2,9 @@
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
   <div class="container py-3">
-    <h1 style="float:left;">Записи сообщества: </h1><h1>{{ title }}</h1>
-    <p>{{ group.description }}</p>
-    <p>Всего постов: {{ count.count }}</p>
+    <h1>Записи сообщества: {{ title }}</h1>
+    <h3>{{ group.description }}</h3>
+    <h5>Всего постов: {{ count.count }}</h5>
     {% for post in page_obj %}
       <div class="card">
         {% include 'includes/article.html' %}

@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
 from http import HTTPStatus
 from posts.models import Post, Group
+from django.core.cache import cache
 
 User = get_user_model()
 
@@ -30,6 +31,7 @@ class PostsURLTests(TestCase):
 
     def test_urls_uses_correct_template(self):
         """URL-address uses the appropriate pattern."""
+        cache.clear()
         templates_url_names = {
             '/': 'posts/index.html',
             '/create/': 'posts/create_post.html',

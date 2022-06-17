@@ -3,10 +3,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from posts.forms import CommentForm, PostForm
 from posts.models import Comment, Post, Group, User
+from django.views.decorators.cache import cache_page
 
 LMT_PSTS: int = 10
+CACHE_TIME: int = 20
 
 
+@cache_page(CACHE_TIME)
 def index(request):
     """View main page."""
     template = 'posts/index.html'
