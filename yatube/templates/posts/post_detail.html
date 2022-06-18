@@ -7,24 +7,17 @@
       <aside class="col-md-4">
         <ul class="list-group list-group-flush">
           <li class="techdark list-group-item">
-            Дата публикации: {{ posts.pub_date|date:"d E Y, H:i" }}
-          </li>
-          {% if posts.group %}
-            <li class="techdark list-group-item">
-              Группа: 
-              <a href="{% url 'posts:group_list' posts.group.slug %}" class="test_style">
-                {{  posts.group  }}
-              </a>
-            </li>
-          {% endif %}
-          <li class="techdark list-group-item">
-              Автор: 
+            Автор: 
             <a href="{% url 'posts:profile' posts.author.username %}" class="test_style">
               {{ posts.author.get_full_name }}@{{  posts.author.username  }}
             </a>
           </li>
+          <li class="techdark list-group-item">
+            Подписчиков: {{ subscribers.count }}<br>
+            Подписан: {{ subscriptions.count }}
+          </li>
           <li class="techdark list-group-item d-flex justify-content-between align-items-center">
-            Всего постов автора: {{ cnt }}
+            Всего записей: {{ cnt }}
           </li>
         </ul>
       </aside>
@@ -49,16 +42,16 @@
           </div>
           <p class="justify">{{  posts.text  }}</p>
           <div class="col">
-            <div class="right">
-              {{ posts.pub_date|date:"d E Y, H:i" }}
-            </div>
             {% if author.username == user.username %}
-              <div class="left">
+              <div class="right">
                 <a href="{% url 'posts:post_edit' posts.id %}" class="test_style">
                   Редактировать запись
                 </a>
               </div>
             {% endif %}
+            <div class="left">
+              {{ posts.pub_date|date:"d E Y, H:i" }}
+            </div>
           </div>
         </div><br>
         {% include 'includes/comment.html' %}

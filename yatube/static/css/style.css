@@ -132,3 +132,20 @@ body.dark .techdark{
     background-color: rgb(36, 36, 36);
     border-bottom: 1px solid lightskyblue;
 }
+.subscribe_btn {
+    text-decoration: none;
+    font-weight: 300;
+    color: rgba(71, 126, 232, 0.9);
+    cursor: pointer;
+    width: 100%;
+    transition: all 600ms;
+}
+.subscribe_btn:hover {
+    color: #202125;
+}
+body.dark .subscribe_btn {
+    color: rgba(71, 126, 232, 0.9)
+}
+body.dark .subscribe_btn:hover {
+    color: rgb(185, 185, 185);
+}

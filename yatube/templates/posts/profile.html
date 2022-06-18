@@ -5,8 +5,21 @@
 {% block content %}
   {% load thumbnail %}
   <div class="container py-3">
-    <h1>Профиль пользователя: {{  author.username  }}</h1>
-    <h3>Зарегестрировался на сайте: {% load tz %}{{ author.date_joined|timezone:"Europe/Moscow" }}(по мск.)</h3>
+    <h1>
+      Профиль пользователя: {{  author.username  }}
+      {% if request.user != author and request.user.is_authenticated %}
+        {% if following %}
+          <a class="subscribe_btn" href="{% url 'posts:profile_unfollow' author.username %}">
+            Отписаться
+          </a>
+        {% else %}
+          <a class="subscribe_btn" href="{% url 'posts:profile_follow' author.username %}">
+            Подписаться
+          </a>
+        {% endif %}
+      {% endif %}
+    </h1>
+    <h3 style="text-align: left;">Зарегестрировался на сайте: {% load tz %}{{ author.date_joined|timezone:"Europe/Moscow" }}(по мск.)</h3>
     {% if posts.count != 0 %}
       <h5>Всего постов на этом сайте: {{ posts.count }} </h5>
     {% endif %}<hr>

@@ -17,6 +17,12 @@
         <div id="myDropdown" class="nav-item">
           {% if user.is_authenticated %}
             <a class="head_swt
+              {% if view_name  == 'posts:follow_index' %}
+                active
+              {% endif %}"
+              href="{% url 'posts:follow_index' %}">Избранные авторы
+            </a>
+            <a class="head_swt
               {% if view_name  == 'posts:post_create' %}
                 active
               {% endif %}"
@@ -52,12 +58,12 @@
       </div>  <!-- dropdown -->
       <div class="nav nav-pills">
         {% if user.is_authenticated %}
-        <a class="head_swt
-          {% if author.username == user.username and is_profile %}
-            active
-          {% endif %}"
-          href="{% url 'posts:profile' user %}">{{  user.username  }}
-        </a>
+          <a class="head_swt
+            {% if author.username == user.username and is_profile %}
+              active
+            {% endif %}"
+            href="{% url 'posts:profile' user %}">{{  user.username  }}
+          </a>
         {% endif %}
       </div>
     {% endwith %}

@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-
 from posts.models import Post, Group
+
 
 User = get_user_model()
 
@@ -18,6 +18,7 @@ class PostModelTest(TestCase):
             author=cls.user,
             text='Тестовый пост для проверки метода __str__'
         )
+
 
     def test_post_and_group_models_have_correct_object_names(self):
         """Checking, that __str__ works correctly for models."""
@@ -36,6 +37,7 @@ class PostModelTest(TestCase):
                     'работает неправильно.'
                 )
 
+
     def test_group_verbose_name(self):
         """Group_verbose_name in the margins is the same as expected."""
         group = PostModelTest.group
@@ -51,6 +53,7 @@ class PostModelTest(TestCase):
                     expected_value,
                     'Метод test_group_verbose_name работает неправильно.'
                 )
+
 
     def test_post_verbose_name(self):
         """Post_verbose_name in the margins is the same as expected."""

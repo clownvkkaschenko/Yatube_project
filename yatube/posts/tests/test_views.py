@@ -4,8 +4,8 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
 from django import forms
 from django.core.cache import cache
-
 from posts.models import Post, Group
+
 
 User = get_user_model()
 
@@ -48,6 +48,7 @@ class PostsPagesTests(TestCase):
             image=uploaded
         )
 
+
     def test_page_uses_correct_template(self):
         """URL-address uses the appropriate pattern."""
         cache.clear()
@@ -81,6 +82,7 @@ class PostsPagesTests(TestCase):
                     'работает неправильно.'
                 )
 
+
     def test_homepage_caching_check(self):
         """Checking the caching of the main page"""
         response_first = self.authorized_client.get(reverse('posts:index'))
@@ -97,6 +99,7 @@ class PostsPagesTests(TestCase):
         third_post = response_third.content
         self.assertNotEqual(second_post, third_post)
 
+
     def test_index_page_show_correct_context(self):
         """The index template is formed with the correct context."""
         cache.clear()
@@ -106,6 +109,7 @@ class PostsPagesTests(TestCase):
         post_image_0 = first_object.image 
         self.assertEqual(post_text_0, self.post.text)
         self.assertEqual(post_image_0, self.post.image)
+
 
     def test_group_list_page_show_correct_context(self):
         """The group_list template is formed with the correct context."""
@@ -122,6 +126,7 @@ class PostsPagesTests(TestCase):
         self.assertEqual(post_text_0, self.post.text)
         self.assertEqual(post_image_0, self.post.image)
 
+
     def test_profile_page_show_correct_context(self):
         """The profile template is formed with the correct context."""
         response = self.authorized_client.get(
@@ -137,6 +142,7 @@ class PostsPagesTests(TestCase):
         self.assertEqual(post_author_0, self.post.author)
         self.assertEqual(post_image_0, self.post.image)
 
+
     def test_post_detail_page_show_correct_context(self):
         """The post_detail template is formed with the correct context."""
         response = self.authorized_client.get(
@@ -146,6 +152,7 @@ class PostsPagesTests(TestCase):
         )
         self.assertEqual(response.context.get('posts').text, self.post.text)
         self.assertEqual(response.context.get('posts').image, self.post.image)
+
 
     def test_post_create_page_show_correct_context(self):
         """The post_create template is formed with the correct context."""
@@ -159,6 +166,7 @@ class PostsPagesTests(TestCase):
             with self.subTest(value=value):
                 form_field = response.context.get('form').fields.get(value)
                 self.assertIsInstance(form_field, expected)
+
 
     def test_post_edit_page_show_correct_context(self):
         """The post_edit template is formed with the correct context."""
@@ -197,6 +205,7 @@ class PaginatorViewsTest(TestCase):
             ] * TOTAL_TEST_PAGES
         )
 
+
     def test_first_page_contains_ten_records(self):
         """The number of posts on the first page is 10."""
         paginators_list = {
@@ -214,6 +223,7 @@ class PaginatorViewsTest(TestCase):
                 self.assertEqual(
                     len(response.context['page_obj']), cnt_of_posts
                 )
+
 
     def test_first_page_contains_ten_records(self):
         """The number of posts on the second page is 3."""

@@ -4,7 +4,7 @@
   <div class="container py-3">
     <h1>Записи сообщества: {{ title }}</h1>
     <h3>{{ group.description }}</h3>
-    <h5>Всего постов: {{ count.count }}</h5>
+    <h3>Всего постов: {{ count.count }}</h3>
     {% for post in page_obj %}
       <div class="card">
         {% include 'includes/article.html' %}

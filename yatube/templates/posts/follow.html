@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block title %}Главная страница YaTube{% endblock %}
+{% block title %}Мои подписки на YaTube{% endblock %}
 {% block header %}
   {% include 'includes/header.html' %}
 {% endblock %}
@@ -10,7 +9,7 @@
     <div class="mask"></div>
   </div>
   <div class="container py-3">
-    <h1 class="contents">Последние обновления на сайте</h1>
+    <h1 class="contents">Записи выбранных авторов</h1>
     {% load cache %}
     {% cache 1 index_page %}
       {% for post in page_obj %}

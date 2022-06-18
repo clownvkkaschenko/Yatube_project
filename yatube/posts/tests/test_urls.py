@@ -1,8 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
+from django.core.cache import cache
 from http import HTTPStatus
 from posts.models import Post, Group
-from django.core.cache import cache
+
 
 User = get_user_model()
 
@@ -29,6 +30,7 @@ class PostsURLTests(TestCase):
             group=self.group
         )
 
+
     def test_urls_uses_correct_template(self):
         """URL-address uses the appropriate pattern."""
         cache.clear()
@@ -50,6 +52,7 @@ class PostsURLTests(TestCase):
                     'работает неправильно.'
                 )
 
+
     def test_of_accessible_pages(self):
         """Pages that are available to any user."""
         available_pages = {
@@ -68,6 +71,7 @@ class PostsURLTests(TestCase):
                     'Метод test_of_accessible_pages работает неправильно.'
                 )
 
+
     def test_pages_available_to_authorized_user(self):
         """Pages available to an authorized user."""
         pages_available_to_authorized_users = [
@@ -83,6 +87,7 @@ class PostsURLTests(TestCase):
                     'Метод test_pages_available_to_authorized_user '
                     'работает неправильно.'
                 )
+
 
     def test_page_list_url_redirect_anonymous(self):
         """Pages that redirect an unauthorized user."""
