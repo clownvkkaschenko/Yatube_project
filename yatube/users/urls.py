@@ -7,7 +7,9 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView, PasswordResetConfirmView
 )
 
+
 app_name = 'users'
+
 
 urlpatterns = [
     path('signup/', views.SignUp.as_view(), name='signup'),

@@ -6,7 +6,6 @@ class AboutPagesURLTests(TestCase):
     def setUp(self):
         self.guest_client = Client()
 
-
     def test_about_urls_uses_correct_template(self):
         """URL-application address about use the corresponding pattern."""
         templates_url_names = {
@@ -23,7 +22,6 @@ class AboutPagesURLTests(TestCase):
                     'Метод test_about_urls_uses_correct_template '
                     'работает неправильно.'
                 )
-
 
     def test_about_of_accessible_pages(self):
         """Address availability check."""

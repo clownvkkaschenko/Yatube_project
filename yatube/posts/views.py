@@ -6,7 +6,6 @@ from posts.models import Follow, Comment, Post, Group, User
 from django.views.decorators.cache import cache_page
 
 
-LMT_PSTS: int = 10
 CACHE_TIME: int = 20
 
 
@@ -30,13 +29,11 @@ def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
     posts = group.group_list.select_related('group')
     page_obj = paginator(request, posts)
-    count = posts.select_related('group')
-    title = group.title
+    group_counter = posts.select_related('group').count()
     context = {
         'group': group,
         'page_obj': page_obj,
-        'title': title,
-        'count': count,
+        'group_counter': group_counter,
     }
     return render(request, template, context)
 
@@ -67,10 +64,8 @@ def post_detail(request, post_id):
     posts = get_object_or_404(Post, id=post_id)
     title = f'Пост: {posts.text[0:30]}'
     author = posts.author
-    cnt = author.posts.count()
     form = CommentForm(request.POST or None)
     comment = Comment.objects.filter(post_id=post_id)
-    comment_cnt = comment.count()
     subscribers = (
         Follow.objects.filter(author=author)
     )
@@ -81,10 +76,8 @@ def post_detail(request, post_id):
         'posts': posts,
         'title': title,
         'author': author,
-        'cnt': cnt,
         'form': form,
         'comments': comment,
-        'comment_cnt': comment_cnt,
         'subscribers': subscribers,
         'subscriptions': subscriptions
     }

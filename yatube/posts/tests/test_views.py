@@ -4,7 +4,8 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
 from django import forms
 from django.core.cache import cache
-from posts.models import Post, Group
+from http import HTTPStatus
+from posts.models import Post, Group, Follow
 
 
 User = get_user_model()
@@ -23,13 +24,14 @@ class PostsPagesTests(TestCase):
         self.authorized_client = Client()
         self.user = User.objects.create_user(username='Ёжик')
         self.authorized_client.force_login(self.user)
-        image = (            
-             b'\x47\x49\x46\x38\x39\x61\x02\x00'
-             b'\x01\x00\x80\x00\x00\x00\x00\x00'
-             b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
-             b'\x00\x00\x00\x2C\x00\x00\x00\x00'
-             b'\x02\x00\x01\x00\x00\x02\x02\x0C'
-             b'\x0A\x00\x3B'
+
+        image = (
+            b'\x47\x49\x46\x38\x39\x61\x02\x00'
+            b'\x01\x00\x80\x00\x00\x00\x00\x00'
+            b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
+            b'\x00\x00\x00\x2C\x00\x00\x00\x00'
+            b'\x02\x00\x01\x00\x00\x02\x02\x0C'
+            b'\x0A\x00\x3B'
         )
         uploaded = SimpleUploadedFile(
             name='test.jpg',
@@ -47,7 +49,6 @@ class PostsPagesTests(TestCase):
             group=self.group,
             image=uploaded
         )
-
 
     def test_page_uses_correct_template(self):
         """URL-address uses the appropriate pattern."""
@@ -82,7 +83,6 @@ class PostsPagesTests(TestCase):
                     'работает неправильно.'
                 )
 
-
     def test_homepage_caching_check(self):
         """Checking the caching of the main page"""
         response_first = self.authorized_client.get(reverse('posts:index'))
@@ -99,17 +99,15 @@ class PostsPagesTests(TestCase):
         third_post = response_third.content
         self.assertNotEqual(second_post, third_post)
 
-
     def test_index_page_show_correct_context(self):
         """The index template is formed with the correct context."""
         cache.clear()
         response = self.authorized_client.get(reverse('posts:index'))
         first_object = response.context['page_obj'][0]
         post_text_0 = first_object.text
-        post_image_0 = first_object.image 
+        post_image_0 = first_object.image
         self.assertEqual(post_text_0, self.post.text)
         self.assertEqual(post_image_0, self.post.image)
-
 
     def test_group_list_page_show_correct_context(self):
         """The group_list template is formed with the correct context."""
@@ -126,7 +124,6 @@ class PostsPagesTests(TestCase):
         self.assertEqual(post_text_0, self.post.text)
         self.assertEqual(post_image_0, self.post.image)
 
-
     def test_profile_page_show_correct_context(self):
         """The profile template is formed with the correct context."""
         response = self.authorized_client.get(
@@ -142,7 +139,6 @@ class PostsPagesTests(TestCase):
         self.assertEqual(post_author_0, self.post.author)
         self.assertEqual(post_image_0, self.post.image)
 
-
     def test_post_detail_page_show_correct_context(self):
         """The post_detail template is formed with the correct context."""
         response = self.authorized_client.get(
@@ -152,7 +148,6 @@ class PostsPagesTests(TestCase):
         )
         self.assertEqual(response.context.get('posts').text, self.post.text)
         self.assertEqual(response.context.get('posts').image, self.post.image)
-
 
     def test_post_create_page_show_correct_context(self):
         """The post_create template is formed with the correct context."""
@@ -166,7 +161,6 @@ class PostsPagesTests(TestCase):
             with self.subTest(value=value):
                 form_field = response.context.get('form').fields.get(value)
                 self.assertIsInstance(form_field, expected)
-
 
     def test_post_edit_page_show_correct_context(self):
         """The post_edit template is formed with the correct context."""
@@ -183,6 +177,61 @@ class PostsPagesTests(TestCase):
                 form_field = response.context.get('form').fields.get(value)
                 self.assertIsInstance(form_field, expected)
 
+
+class FollowViewsTest(TestCase):
+    """Subscription test."""
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.author = User.objects.create_user(username='Автор')
+        cls.subscriber = User.objects.create_user(username='Подписчик')
+
+    def setUp(self):
+        self.authorized_client = Client()
+        self.authorized_client.force_login(self.author)
+
+        self.authorized_client_two = Client()
+        self.authorized_client_two.force_login(self.subscriber)
+
+        self.post = Post.objects.create(
+            text='Интересная, но сложная вещь, эти тесты...',
+            author=self.author,
+        )
+
+    def test_subscription_to_the_selected_author(self):
+        """The user can follow the author."""
+        count_subscriptions = Follow.objects.count()
+        response = self.authorized_client_two.get(
+            reverse('posts:profile_follow', kwargs={
+                'username': self.author.username}))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(Follow.objects.count(), count_subscriptions + 1)
+        self.assertRedirects(response, reverse(
+            'posts:profile', kwargs={'username': self.author.username}))
+        self.assertTrue(Follow.objects.filter(
+            user=self.subscriber, author=FollowViewsTest.author
+        ).exists())
+
+    def test_unsubscribe_from_selected_author(self):
+        """The user can unfollow the author."""
+        Follow.objects.create(user=self.subscriber, author=self.author)
+        count_subscriptions = Follow.objects.count()
+        response = self.authorized_client_two.get(
+            reverse('posts:profile_unfollow', kwargs={
+                'username': self.author.username}))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(Follow.objects.count(), count_subscriptions - 1)
+        self.assertRedirects(response, reverse(
+            'posts:profile', kwargs={'username': self.author.username}))
+        self.assertFalse(Follow.objects.filter(
+            user=self.subscriber, author=self.author
+        ).exists())
+
+    def test_posts_by_selected_authors(self):
+        """Posts of selected authors are published in the feed."""
+        Follow.objects.create(user=self.subscriber, author=self.author)
+        response = self.authorized_client_two.get(reverse('posts:follow_index'))
+        self.assertEqual(response.context['page_obj'][0], self.post)
 
 class PaginatorViewsTest(TestCase):
     """Paginator testing."""
@@ -205,7 +254,6 @@ class PaginatorViewsTest(TestCase):
             ] * TOTAL_TEST_PAGES
         )
 
-
     def test_first_page_contains_ten_records(self):
         """The number of posts on the first page is 10."""
         paginators_list = {
@@ -223,7 +271,6 @@ class PaginatorViewsTest(TestCase):
                 self.assertEqual(
                     len(response.context['page_obj']), cnt_of_posts
                 )
-
 
     def test_first_page_contains_ten_records(self):
         """The number of posts on the second page is 3."""

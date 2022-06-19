@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class CreatedModel(models.Model):
     """Abstract model. Adds a creation date."""
     pub_date = models.DateTimeField(
@@ -9,4 +10,4 @@ class CreatedModel(models.Model):
     )
 
     class Meta:
-        abstract = True 
+        abstract = True

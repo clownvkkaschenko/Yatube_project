@@ -1,6 +1,8 @@
 from django.core.paginator import Paginator
 
+
 LMT_PSTS: int = 10
+
 
 def paginator(request, posts):
     paginator = Paginator(posts, LMT_PSTS)

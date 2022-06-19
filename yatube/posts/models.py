@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from core.models import CreatedModel
 
+
 User = get_user_model()
 
 
@@ -75,7 +76,8 @@ class Comment(models.Model):
     )
     text = models.TextField(
         'Текст комментария',
-        help_text = 'Учтите, что вы не сможете изменить или удалить ваш комментарий'
+        help_text='Учтите, что вы не сможете изменить '
+        'или удалить ваш комментарий'
     )
 
     class Meta:
