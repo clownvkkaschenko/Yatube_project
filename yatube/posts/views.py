@@ -142,9 +142,13 @@ def follow_index(request):
     template = 'posts/follow.html'
     post_list = Post.objects.filter(author__following__user=request.user)
     page_obj = paginator(request, post_list)
+    subscriptions = (
+        Follow.objects.filter(author__following__user=request.user)
+    )
     context = {
         'page_obj': page_obj,
         'is_index': True,
+        'subscriptions': subscriptions
     }
     return render(request, template, context)
 

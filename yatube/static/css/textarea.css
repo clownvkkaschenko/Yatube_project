@@ -2,7 +2,7 @@
     max-height: 2em  !important;
     min-height: 2em  !important;
 }
-#id_text  {
+#id_text {
     width: 100%;
     line-height:normal;
     resize: none;
@@ -17,7 +17,7 @@
 .txta {
     transition: 0.5s;
 }
-body.dark .txta{
+body.dark .txta {
     transition: 0.5s;
     background-color: rgb(67, 67, 67);
     color: rgb(228, 224, 224);

@@ -1,5 +1,9 @@
+import shutil
+import tempfile
+
+from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.test import Client, TestCase
+from django.test import Client, TestCase, override_settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
 from django import forms
@@ -10,21 +14,33 @@ from posts.models import Post, Group, Follow
 
 User = get_user_model()
 
+TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 TOTAL_TEST_PAGES: int = 13
 LMT_PSTS_FRST_PG: int = 10
 
 
+@override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
 class PostsPagesTests(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.user = User.objects.create_user(username='Автор тестов')
 
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
+
     def setUp(self):
         self.authorized_client = Client()
         self.user = User.objects.create_user(username='Ёжик')
         self.authorized_client.force_login(self.user)
 
+        self.group = Group.objects.create(
+            title='Сообщество для тестов',
+            slug='tests_tests_and_tests',
+            description='описание тестов'
+        )
         image = (
             b'\x47\x49\x46\x38\x39\x61\x02\x00'
             b'\x01\x00\x80\x00\x00\x00\x00\x00'
@@ -38,18 +54,12 @@ class PostsPagesTests(TestCase):
             content=image,
             content_type='image/jpg'
         )
-        self.group = Group.objects.create(
-            title='Сообщество для тестов',
-            slug='tests_tests_and_tests',
-            description='описание тестов'
-        )
         self.post = Post.objects.create(
             text='Интересная, но сложная вещь, эти тесты...',
             author=self.user,
             group=self.group,
             image=uploaded
         )
-
     def test_page_uses_correct_template(self):
         """URL-address uses the appropriate pattern."""
         cache.clear()
@@ -230,8 +240,11 @@ class FollowViewsTest(TestCase):
     def test_posts_by_selected_authors(self):
         """Posts of selected authors are published in the feed."""
         Follow.objects.create(user=self.subscriber, author=self.author)
-        response = self.authorized_client_two.get(reverse('posts:follow_index'))
+        response = self.authorized_client_two.get(
+            reverse('posts:follow_index')
+        )
         self.assertEqual(response.context['page_obj'][0], self.post)
+
 
 class PaginatorViewsTest(TestCase):
     """Paginator testing."""

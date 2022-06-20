@@ -8,9 +8,6 @@
     transition: 0s;
     color: #00aeff;
 }
-
-/* DARK MODE */
-
 body.dark .link_about {
     color: #fff;
 }

@@ -3,7 +3,7 @@ body.dark .page-link {
     background-color: rgba(202, 202, 202, 0.147);
     color: #fff;
 }
-body.dark .page-link:hover{
+body.dark .page-link:hover {
     background-color: #7a7d80;
 }
 body.dark .page-item.active .page-link {

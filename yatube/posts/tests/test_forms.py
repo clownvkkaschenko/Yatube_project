@@ -7,12 +7,12 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 from http import HTTPStatus
-from posts.models import Post, Group, Follow
+from posts.models import Post, Group, Comment
 
-
-TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
 User = get_user_model()
+
+TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
 
 @override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
@@ -35,28 +35,18 @@ class PostsPagesTests(TestCase):
         self.group = Group.objects.create(
             title='Сообщество для тестов',
             slug='tests_tests_and_tests',
-            description='описание тестов'
+            description='Описание тестов'
         )
         self.post = Post.objects.create(
             text='Интересная, но сложная вещь, эти тесты...',
             author=self.user,
             group=self.group
         )
-
-    def test_commenting_on_entries(self):
-        """Only authorized users can comment."""
-        form_data = {
-            'text': 'test comment'
-        }
-        response = self.authorized_client.post(
-            reverse('posts:add_comment', kwargs={'post_id': self.post.id}),
-            data=form_data,
-            follow=True
+        self.comment = Comment.objects.create(
+            post=self.post,
+            author=self.user,
+            text='Тестовый комментарий',
         )
-        new_comment = response.context['comments'][0]
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertEqual(new_comment.text, form_data['text'])
-        self.assertEqual(new_comment.post.id, self.post.id)
 
     def test_creating_a_post_for_an_authorized_user(self):
         """Valid form creates an entry in Post."""
@@ -136,3 +126,20 @@ class PostsPagesTests(TestCase):
             response_unauthorized_user.status_code,
             HTTPStatus.FOUND,
         )
+
+    def test_commenting_on_entries(self):
+        """Only authorized users can comment."""
+        comment_counter = Comment.objects.count()
+        form_data = {
+            'text': self.comment.text
+        }
+        response = self.authorized_client.post(
+            reverse('posts:add_comment', kwargs={'post_id': self.post.id}),
+            data=form_data,
+            follow=True
+        )
+        new_comment = response.context['comments'][0]
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertEqual(Comment.objects.count(), comment_counter + 1)
+        self.assertEqual(new_comment.text, form_data['text'])
+        self.assertEqual(new_comment.post.id, self.post.id)
