@@ -17,3 +17,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['text']
+
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        for _, field in self.fields.items():
+            field.widget.attrs['placeholder'] = field.help_text

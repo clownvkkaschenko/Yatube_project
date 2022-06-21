@@ -147,7 +147,6 @@ def follow_index(request):
     )
     context = {
         'page_obj': page_obj,
-        'is_index': True,
         'subscriptions': subscriptions
     }
     return render(request, template, context)

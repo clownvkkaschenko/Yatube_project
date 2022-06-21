@@ -3,6 +3,7 @@
     min-height: 2em  !important;
 }
 #id_text {
+    min-height: 5em;
     width: 100%;
     line-height:normal;
     resize: none;
@@ -16,6 +17,9 @@
 }
 .txta {
     transition: 0.5s;
+}
+.form-control {
+    max-height: 6em;
 }
 body.dark .txta {
     transition: 0.5s;

@@ -60,6 +60,7 @@ class PostsPagesTests(TestCase):
             group=self.group,
             image=uploaded
         )
+
     def test_page_uses_correct_template(self):
         """URL-address uses the appropriate pattern."""
         cache.clear()

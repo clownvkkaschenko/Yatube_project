@@ -58,18 +58,55 @@
       </div>  <!-- dropdown -->
       <div class="nav nav-pills">
         {% if user.is_authenticated %}
-          <a class="head_swt
+          <a class="head_swt_pc
             {% if author.username == user.username and is_profile %}
               active
             {% endif %}"
             href="{% url 'posts:profile' user %}">{{  user.username  }}
+          </a>
+          <a class="head_swt_pc
+            {% if view_name  == 'posts:follow_index' %}
+              active
+            {% endif %}"
+            href="{% url 'posts:follow_index' %}">Избранные авторы
+          </a>
+          <a class="head_swt_pc
+            {% if view_name  == 'posts:post_create' %}
+              active
+            {% endif %}"
+            href="{% url 'posts:post_create' %}">Создать запись
+          </a>
+          <a class="head_swt_pc
+            {% if view_name  == 'users:password_change' %}
+              active
+            {% endif %}"
+            href="{% url 'users:password_change' %}">Сменить пароль
+          </a>
+          <a class="head_swt_pc
+            {% if view_name  == 'about:exit' %}
+              active
+            {% endif %}"
+            href="{% url 'about:exit' %}">Выйти
+          </a>
+        {% else %}
+          <a class="head_swt_pc
+            {% if view_name  == 'users:login' %}
+              active
+            {% endif %}"
+            href="{% url 'users:login' %}">Войти
+          </a>
+          <a class="head_swt_pc
+            {% if view_name  == 'users:signup' %}
+              active
+            {% endif %}"
+            href="{% url 'users:signup' %}">Регистрация
           </a>
         {% endif %}
       </div>
     {% endwith %}
     <div class="MenuButton">
       <button id="theme-toggle">
-        <img style="width: 26px" src="{% static 'img/mode/moon.png' %}">
+        <img style="width: 26px" src="{% static 'img/mode/moon.png' %}" id="tt-img">
       </button>
     </div>
   </div>  <!-- container -->

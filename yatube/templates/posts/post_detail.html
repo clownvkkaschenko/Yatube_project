@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
+  {% load user_filters %}
   {% load thumbnail %}
   <div class="container py-5">
     <div class="row">
@@ -53,44 +54,39 @@
               {{ posts.pub_date|date:"d E Y, H:i" }}
             </div>
           </div>
-        </div>
-        {% load user_filters %}
-        {% if user.is_authenticated %}
-          <div class="card my-4">
-            <h5 class="card-header">Добавить комментарий:</h5>
-            <div class="card-body">
-              <form method="post" action="{% url 'posts:add_comment' posts.id %}">
-                {% csrf_token %}
-                <div class="form-group row my-1 p-3">
-                  {{ form.text|addclass:'txta' }}
-                  {{ form.text.help_text }}
-                </div>
-                <button type="submit" class="btn btn-primary">Отправить</button>
-              </form>
-            </div>
-          </div>
-        {% endif %}
-        {% if comments.count != 0 %}
+        </div><br>
+        {% if comments.count %}
           <h5>Комментарии:</h5>
         {% else %}
           <h5>Ваш комментарий будет первым.</h5>
         {% endif %}
         {% for comment in comments %}
-        <div class="card">
-          <div class="media mb-0">
-            <div class="right">
-                {{ comment.created|date:"d E Y, H:i" }}
+          <div class="card">
+            <div class="media mb-0">
+              <div class="right">
+                  {{ comment.created|date:"d E Y, H:i" }}
+              </div>
+              <div class="left">
+                  <a href="{% url 'posts:profile' comment.author.username %}" class="test_style">
+                    @{{ comment.author.username }}
+                  </a>
+              </div>
+              <p class="justify">{{ comment.text }}</p>
             </div>
-            <div class="left">
-                <a href="{% url 'posts:profile' comment.author.username %}" class="test_style">
-                  @{{ comment.author.username }}
-                </a>
-            </div>
-            <p class="justify">{{ comment.text }}</p>
           </div>
-        </div>
-        {% if not forloop.last %}<br>{% endif %}
+          {% if not forloop.last %}<br>{% endif %}
         {% endfor %}
+        {% if user.is_authenticated %}
+          <div class="my-3">
+            <form method="post" action="{% url 'posts:add_comment' posts.id %}">
+              {% csrf_token %}
+              <div class="form-group row my-1 p-2">
+                {{ form.text|addclass:'form-control' }}
+              </div>
+              <button type="submit" class="btn btn-primary">Отправить</button>
+            </form>
+          </div>
+        {% endif %}
       </article>
     </div>  <!-- row -->
   </div>  <!-- container -->

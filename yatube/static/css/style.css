@@ -73,6 +73,16 @@ html, body {
 .subscribe_btn:hover {
     color: #202125;
 }
+.text_error {
+    text-align: center;
+    letter-spacing: 0.4em;
+    font-weight: 600;
+    font-size: 60px;
+    color: rgb(55, 55, 55);
+}
+body.dark .text_error {
+    color: aqua;
+}
 
 /* DARK MODE */
 
