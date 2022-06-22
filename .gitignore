@@ -127,9 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-yatube/media/
 
 # папки со статикой и медиа
 static/
-yatube/posts/static/
+yatube/static/
 yatube/media/
