@@ -76,8 +76,8 @@ class Comment(models.Model):
     )
     text = models.TextField(
         'Текст комментария',
-        help_text='Напишите свой комментарий, но учтите, пока что вы не сможете изменить '
-        'или удалить его.'
+        help_text='Напишите свой комментарий, но учтите, '
+        'пока что вы не сможете изменить или удалить его.'
     )
 
     class Meta:
@@ -106,7 +106,9 @@ class Follow(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['user', 'author'], name='unique_object'),
+            models.UniqueConstraint(
+                fields=['user', 'author'], name='unique_object'
+            ),
         ]
         verbose_name = 'Подписка на автора'
         verbose_name_plural = 'Подписки на авторов'

@@ -199,7 +199,9 @@ class PostsPagesTests(TestCase):
         response = self.authorized_client.get(
             reverse('posts:post_detail', kwargs={'post_id': self.post.id})
         )
-        self.assertEqual(response.context['comments'][0].text, self.comments.text)
+        self.assertEqual(
+            response.context['comments'][0].text, self.comments.text
+        )
 
 
 class FollowViewsTest(TestCase):
