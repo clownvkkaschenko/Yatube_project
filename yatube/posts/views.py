@@ -66,6 +66,7 @@ def post_detail(request, post_id):
     author = posts.author
     form = CommentForm(request.POST or None)
     comment = Comment.objects.filter(post_id=post_id)
+    image = Post.objects.filter(image=posts.image).count()
     subscribers = (
         Follow.objects.filter(author=author)
     )
@@ -79,7 +80,8 @@ def post_detail(request, post_id):
         'form': form,
         'comments': comment,
         'subscribers': subscribers,
-        'subscriptions': subscriptions
+        'subscriptions': subscriptions,
+        'image': image
     }
     return render(request, template, context)
 

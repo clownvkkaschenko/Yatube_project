@@ -17,7 +17,7 @@
   </div>
   <p class="justify">{{ post.text }}</p>
   <div class="right">
-    {{ post.pub_date|date:"d E Y, H:i" }}
+    {% load tz %}{{ post.pub_date|timezone:"Europe/Moscow" }}
   </div>
   <div class="left">
     <a href="{% url 'posts:post_detail' post.id %}" class="test_style">

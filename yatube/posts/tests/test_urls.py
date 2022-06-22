@@ -89,7 +89,10 @@ class PostsURLTests(TestCase):
         """Pages that redirect an unauthorized user."""
         pages_available_to_guest_client = [
             '/create/',
-            f'/posts/{self.post.id}/edit/'
+            f'/posts/{self.post.id}/edit/',
+            f'/posts/{self.post.id}/comment/',
+            f'/profile/{self.post.author}/follow/',
+            f'/profile/{self.post.author}/unfollow/'
         ]
         for address in pages_available_to_guest_client:
             with self.subTest(address=address):

@@ -9,7 +9,7 @@ from django.urls import reverse
 from django import forms
 from django.core.cache import cache
 from http import HTTPStatus
-from posts.models import Post, Group, Follow
+from posts.models import Post, Group, Follow, Comment
 
 
 User = get_user_model()
@@ -60,6 +60,11 @@ class PostsPagesTests(TestCase):
             group=self.group,
             image=uploaded
         )
+        self.comments = Comment.objects.create(
+            post=self.post,
+            author=self.user,
+            text='Тестовый комментарий'
+        )
 
     def test_page_uses_correct_template(self):
         """URL-address uses the appropriate pattern."""
@@ -82,7 +87,8 @@ class PostsPagesTests(TestCase):
             reverse(
                 'posts:post_edit',
                 kwargs={'post_id': self.post.id}):
-                    'posts/create_post.html'
+                    'posts/create_post.html',
+            reverse('posts:follow_index'): 'posts/follow.html'
         }
         for reverse_name, template in templates_pages_names.items():
             with self.subTest(reverse_name=reverse_name):
@@ -188,6 +194,13 @@ class PostsPagesTests(TestCase):
                 form_field = response.context.get('form').fields.get(value)
                 self.assertIsInstance(form_field, expected)
 
+    def test_add_comment_page_show_correct_context(self):
+        """The add_comment template is formed with the correct context."""
+        response = self.authorized_client.get(
+            reverse('posts:post_detail', kwargs={'post_id': self.post.id})
+        )
+        self.assertEqual(response.context['comments'][0].text, self.comments.text)
+
 
 class FollowViewsTest(TestCase):
     """Subscription test."""
@@ -244,7 +257,10 @@ class FollowViewsTest(TestCase):
         response = self.authorized_client_two.get(
             reverse('posts:follow_index')
         )
-        self.assertEqual(response.context['page_obj'][0], self.post)
+        first_object = response.context['page_obj'][0]
+        post_image_0 = first_object.image
+        self.assertEqual(first_object, self.post)
+        self.assertEqual(post_image_0, self.post.image)
 
 
 class PaginatorViewsTest(TestCase):

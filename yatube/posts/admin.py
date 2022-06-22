@@ -1,5 +1,14 @@
 from django.contrib import admin
-from posts.models import Post, Group, Comment
+from posts.models import Post, Group, Comment, Follow
+
+
+class FollowAdmin(admin.ModelAdmin):
+    """Subscription management via admin."""
+    list_display = (
+        'user',
+        'author'
+    )
+    empty_value_display = '-пусто-'
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -45,3 +54,4 @@ class GroupAdmin(admin.ModelAdmin):
 admin.site.register(Post, PostAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Follow, FollowAdmin)

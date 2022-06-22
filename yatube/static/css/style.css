@@ -83,6 +83,18 @@ html, body {
 body.dark .text_error {
     color: aqua;
 }
+.btn_comment {
+    border: solid 1px #3498db;
+    color: #fff;
+    background-color: #3498db;
+    border-radius: 0.6em;
+    font-weight: 500;
+    padding: 0.3em 0.8em;
+}
+.btn_comment:hover {
+    color: rgb(218, 218, 218);
+    background-color: #3498db;
+}
 
 /* DARK MODE */
 
@@ -157,4 +169,11 @@ body.dark .subscribe_btn {
 }
 body.dark .subscribe_btn:hover {
     color: rgb(185, 185, 185);
+}
+body.dark .btn_comment {
+    border: solid 1px #312fcc;
+    background-color: #312fcc;
+}
+body.dark .btn_comment:hover {
+    background-color: #312fcc;
 }

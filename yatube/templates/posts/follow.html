@@ -8,7 +8,7 @@
     {% if subscriptions.count > 0 %}
       <h1 class="contents">Записи выбранных авторов</h1>
     {% else %}
-      <h1 class="contents">У вас нет любимых авторов</h1>
+      <h1 style="text-align:center" class="contents">У вас нет любимых авторов</h1>
     {% endif %}
     {% load cache %}
     {% cache 1 index_page %}

@@ -123,8 +123,7 @@ class PostsPagesTests(TestCase):
             f'/posts/{self.post.id}/edit/'
         )
         self.assertEqual(
-            response_unauthorized_user.status_code,
-            HTTPStatus.FOUND,
+            response_unauthorized_user.status_code, HTTPStatus.FOUND
         )
 
     def test_commenting_on_entries(self):
@@ -143,3 +142,21 @@ class PostsPagesTests(TestCase):
         self.assertEqual(Comment.objects.count(), comment_counter + 1)
         self.assertEqual(new_comment.text, form_data['text'])
         self.assertEqual(new_comment.post.id, self.post.id)
+
+    def test_comment_test_for_guest_client(self):
+        """Unauthorized users cannot comment."""
+        comment_counter = Comment.objects.count()
+        form_data = {
+            'text': self.comment.text
+        }
+        response = self.guest_client.post(
+            reverse('posts:add_comment', kwargs={'post_id': self.post.id}),
+            data=form_data,
+            follow=True
+        )
+        login = reverse('users:login')
+        expect = reverse(
+            'posts:add_comment', kwargs={'post_id': self.post.id}
+        )
+        self.assertRedirects(response, login + '?next=' + expect)
+        self.assertEqual(Comment.objects.count(), comment_counter)
