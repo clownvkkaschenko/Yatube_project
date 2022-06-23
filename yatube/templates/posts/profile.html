@@ -57,7 +57,10 @@
           </div>
           <div class="left">
             <a href="{% url 'posts:post_detail' post.id %}" class="test_style">
-              Комментарии({{ post.comments.count }})
+              Комментарии
+              {% if post.comments.count != 0 %}
+                ({{  post.comments.count }})
+              {% endif %}
             </a>
           </div>
         </article>
