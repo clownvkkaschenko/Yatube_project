@@ -156,6 +156,9 @@ body.dark .head_swt.active {
     .nav-item .author_tel {
         display: none
     }
+    body.dark .nav-item .author_tel {
+        display: none
+    }
 }
 @media screen and (max-width: 780px) {
     .head_swt_pc {

@@ -103,3 +103,20 @@ class PostsURLTests(TestCase):
                     'Метод test_page_list_url_redirect_anonymous '
                     'работает неправильно.'
                 )
+
+    def test_page_list_url_redirect_authorized_client(self):
+        """Pages that redirect an authorized user."""
+        pages_available_to_guest_client = [
+            f'/posts/{self.post.id}/comment/',
+            f'/profile/{self.post.author}/follow/',
+            f'/profile/{self.post.author}/unfollow/'
+        ]
+        for address in pages_available_to_guest_client:
+            with self.subTest(address=address):
+                response = self.guest_client.get(address)
+                self.assertEqual(
+                    response.status_code,
+                    HTTPStatus.FOUND,
+                    'Метод test_page_list_url_redirect_authorized_client '
+                    'работает неправильно.'
+                )
