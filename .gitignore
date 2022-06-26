@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # папки со статикой и медиа
-yatube/static/
-yatube/media/
+yatube/media/*
+yatube/static/*
