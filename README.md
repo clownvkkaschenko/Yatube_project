@@ -4,15 +4,7 @@
 ### Технологии
 - Python 3.10.4
 - Django 2.2.19
-### Запуск проекта в dev-режиме
-- Установите и активируйте виртуальное окружение
-- Установите зависимости из файла requirements.txt
-```
-$ pip install -r requirements.txt
-``` 
-- В папке с файлом _manage.py_ выполните команду:
-```
-$ python manage.py runserver
-```
+### This site will be disabled on Friday 23 September 2022
+_https://kaschenko.pythonanywhere.com/_
 ### Автор
 Ivan Konyshkin
