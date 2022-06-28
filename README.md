@@ -7,4 +7,4 @@
 ### This site will be disabled on Friday 23 September 2022
 _https://kaschenko.pythonanywhere.com/_
 ### Author
-Ivan Konyshkin
+kaschenko
