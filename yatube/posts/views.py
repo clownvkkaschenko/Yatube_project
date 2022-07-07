@@ -6,7 +6,7 @@ from posts.models import Follow, Comment, Post, Group, User
 from django.views.decorators.cache import cache_page
 
 
-CACHE_TIME: int = 20
+CACHE_TIME: int = 5
 
 
 @cache_page(CACHE_TIME)

@@ -1,4 +1,4 @@
-.dropdown {
+.dropdown, .dropdown_pc {
     position: relative;
     display: inline-block;
 }
@@ -32,10 +32,6 @@
     border: none;
     -webkit-transition: -webkit-transform .2s ease-in-out;
     transition:         transform .2s ease-in-out;
-}
-.menu_btn:hover {
-    -webkit-transform: rotate(20deg);
-            transform: rotate(20deg);
 }
 .head_swt {
     color: rgb(121, 121, 121);
@@ -158,6 +154,13 @@ body.dark .head_swt.active {
     }
     body.dark .nav-item .author_tel {
         display: none
+    }
+    .dropdown_pc {
+        display: none   
+    }
+    .menu_btn:hover {
+        -webkit-transform: rotate(20deg);
+                transform: rotate(20deg);
     }
 }
 @media screen and (max-width: 780px) {

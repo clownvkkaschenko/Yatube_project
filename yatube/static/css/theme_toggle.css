@@ -7,7 +7,9 @@
     -webkit-transition: -webkit-transform .2s ease-in-out;
             transition:         transform .2s ease-in-out;
 }
-#theme-toggle:hover {
-    -webkit-transform: rotate(40deg); /* Градусы поворота  */
-            transform: rotate(40deg);
+@media screen and (min-width: 780px) {
+    #theme-toggle:hover {
+        -webkit-transform: rotate(40deg); /* Градусы поворота  */
+                transform: rotate(40deg);
+    }
 }

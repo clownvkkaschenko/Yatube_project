@@ -21,7 +21,6 @@ class UserPagesURLTests(TestCase):
         """Address availability check."""
         available_pages = {
             '/auth/signup/': 'users/signup.html',
-            '/auth/logout/': 'users/logged_out.html',
             '/auth/login/': 'users/login.html',
             '/auth/reset/done/': 'users/password_reset_complete.html',
         }
