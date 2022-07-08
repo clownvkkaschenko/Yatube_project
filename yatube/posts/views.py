@@ -127,6 +127,15 @@ def post_edit(request, post_id):
 
 
 @login_required
+def post_delete(request, post_id):
+    post = Post.objects.get(id=post_id)
+    if post.author != request.user:
+        return redirect('posts:post_detail', post_id=post_id)
+    post.delete()
+    return redirect('posts:index')
+
+
+@login_required
 def add_comment(request, post_id):
     posts = get_object_or_404(Post, pk=post_id)
     form = CommentForm(request.POST or None)
@@ -136,6 +145,15 @@ def add_comment(request, post_id):
         comment.post = posts
         comment.save()
     return redirect('posts:post_detail', post_id=post_id)
+
+
+@login_required
+def delete_comment(request, id):
+    comment = get_object_or_404(Comment, id=id)
+    if comment.author != request.user:
+        return redirect('posts:post_detail', post_id=comment.post.id)
+    comment.delete()
+    return redirect('posts:post_detail', post_id=comment.post.id)
 
 
 @login_required

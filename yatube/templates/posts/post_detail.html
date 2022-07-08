@@ -27,6 +27,13 @@
               </a>
             </li>
           {% endif %}
+          {% if author.username == user.username %}
+            <li class="techdark list-group-item">
+              <a href="{% url 'posts:post_delete' posts.id %}" class="test_style">
+                Удалить запись
+              </a>
+            </li>
+          {% endif %}
         </ul>
       </aside>
       <article class="col-md-8">
@@ -37,9 +44,9 @@
           <div class="col">
             <div class="right">
               {% if posts.group %}
-              <a href="{% url 'posts:group_list' posts.group.slug %}" class="test_style">
-                {{ posts.group }}
-              </a>
+                <a href="{% url 'posts:group_list' posts.group.slug %}" class="test_style">
+                  {{ posts.group }}
+                </a>
               {% endif %}
             </div>
             <div class="left">
@@ -75,6 +82,12 @@
               <button type="submit" class="btn btn-primary">Отправить</button>
             </form>
           </div>
+        {% else %}
+          <form action="{% url 'users:login' %}">
+            <button class="btn_comment my-3">
+              Войдте в свой аккаунт, что-бы написать комментарий.
+            </button>
+          <form>
         {% endif %}<br>
         {% if comments.count %}
           <h5>Комментарии:</h5>
@@ -91,6 +104,13 @@
                   </a>
               </div>
               <p style="padding: 0.3rem 0.7rem 0.5rem 0.7rem;" class="justify">{{ comment.text }}</p>
+              {% if comment.author.username == user.username %}
+                <div class="left">
+                  <a href="{% url 'posts:delete_comment' comment.id %}" class="test_style">
+                    Удалить комментарий
+                  </a>
+                </div>
+              {% endif %}
             </div>
           </div>
           {% if not forloop.last %}<br>{% endif %}
