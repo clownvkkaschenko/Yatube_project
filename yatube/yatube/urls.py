@@ -11,6 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('posts.urls', namespace='posts')),
     path('about/', include('about.urls', namespace='about')),
+    path('social/', include('social_django.urls', namespace='social')),
 ]
 
 handler403 = 'core.views.permission_denied'
