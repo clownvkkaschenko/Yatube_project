@@ -9,23 +9,23 @@ Cоциальная сеть YaTubeProject позволяет пользоват
 ### Запуск проекта:
 - Клонируйте репозиторий и перейдите в него
     ```
-    $ git clone git@github.com:clownvkkaschenko/Yatube_project.git
+    git clone git@github.com:clownvkkaschenko/Yatube_project.git
     ```
 - Установите и активируйте виртуальное окружение
     ```
-    $ python -m venv venv
-    $ source venv/Scripts/activate
+    python -m venv venv
+    source venv/Scripts/activate
     ```
 - Установите зависимости из файла requirements.txt
     ```
-    $ pip install -r requirements.txt
+    pip install -r requirements.txt
     ``` 
 - Перейдите в папку **yatube** с файлом manage.py, выполните миграции, и запустите сервер:
     ```
-    $ python manage.py makemigrations
-    $ python manage.py migrate
+    python manage.py makemigrations
+    python manage.py migrate
 
-    $ python manage.py runserver
+    python manage.py runserver
     ```
 
 После этого проект будет доступен по url-адресу 127.0.0.1:8000
