@@ -1,8 +1,7 @@
 <div id="header" align="center">
   <h1>Проект YaTube</h1>
 </div>
-<img src="https://img.shields.io/badge/Python-3.7.9-brightgreen"/>
-<img src="https://img.shields.io/badge/Django-2.2.19-blueviolet"/>
+<img src="https://img.shields.io/badge/Python-3.7.9-brightgreen"/><img src="https://img.shields.io/badge/Django-2.2.19-blueviolet"/>
 
 Cоциальная сеть YaTubeProject позволяет пользователям создавать учетную запись, публиковать посты и подписываться на любимых авторов.
 
