@@ -1,16 +1,19 @@
-from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-
-from django.urls import path, include
-
+from django.contrib import admin
+from django.urls import include, path
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('auth/', include('users.urls')),
     path('auth/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    path('', include('posts.urls', namespace='posts')),
-    path('about/', include('about.urls', namespace='about'))
+    path('api/', include('api.urls', namespace='api')),
+    path('redoc/',
+         TemplateView.as_view(template_name='redoc.html'),
+         name='redoc'),
+    path('about/', include('about.urls', namespace='about')),
+    path('', include('posts.urls', namespace='posts'))
 ]
 
 handler403 = 'core.views.permission_denied'
