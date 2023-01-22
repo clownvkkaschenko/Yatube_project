@@ -1,24 +1,10 @@
 import os
-from os import getenv
-from dotenv import load_dotenv
 
-load_dotenv()
 
-SOCIAL_AUTH_YANDEX_OAUTH2_KEY = getenv('CLIENT_ID')
-
-SOCIAL_AUTH_YANDEX_OAUTH2_SECRET = getenv('CLIENT_SECRET')
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = ')rexdj%3nw=y74mpteg)onploq7es*x3dp+8y9%gj2!h@6skn+'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
@@ -29,22 +15,18 @@ ALLOWED_HOSTS = [
 ]
 
 
-# Application definition
-
 INSTALLED_APPS = [
-    'posts.apps.PostsConfig',  # created an app "posts"
-    'users.apps.UsersConfig',  # created an app "users"
-    'core.apps.CoreConfig',  # created an app "core"
-    'about.apps.AboutConfig',  # created an app "about"
-    'sorl.thumbnail',  # created an app "sorl-thumbnail"
+    'posts.apps.PostsConfig',
+    'users.apps.UsersConfig',
+    'core.apps.CoreConfig',
+    'about.apps.AboutConfig',
+    'sorl.thumbnail',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'debug_toolbar',
-    'social_django'
+    'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [
@@ -54,8 +36,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 INTERNAL_IPS = [
@@ -76,9 +57,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'core.context_processors.year.year',
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
+                'core.context_processors.year.year'
             ],
         },
     },
@@ -87,9 +66,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'yatube.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -97,9 +73,6 @@ DATABASES = {
     }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -116,13 +89,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.yandex.YandexOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
-# Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'ru'
 
@@ -134,9 +100,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
