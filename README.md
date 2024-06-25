@@ -12,7 +12,7 @@ Cоциальная сеть YaTubeProject позволяет пользоват
 ### Запуск проекта:
 - Клонируйте репозиторий и перейдите в него
     ```
-    git clone git@github.com:clownvkkaschenko/Yatube_project.git
+    git clone git@github.com:kaschenkkko/YatubeProject.git
     ```
 - Установите и активируйте виртуальное окружение
     ```
